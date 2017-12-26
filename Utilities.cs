@@ -37,7 +37,7 @@ namespace NuklearSharp
 						structPfx[ty.Name] = "enum";
 						sizes[ty.Name] = Marshal.SizeOf(ty.GetEnumUnderlyingType());
 					} else {
-						if (ty.Name == "nk_style_item_data") {
+						if (ty.Name == "nk_style_item_data" || ty.Name == "nk_page_data") {
 							structPfx[ty.Name] = "union";
 						} else if (ty.Name == "nk_handle" || ty.Name == "nk_glyph") {
 							structPfx[ty.Name] = "";

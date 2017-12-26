@@ -29,7 +29,7 @@ namespace NuklearSharp
 	[StructLayout(LayoutKind.Sequential)]
 	public unsafe struct nk_text_undo_state {
 		// fixed nk_text_undo_record undo_rec[99];
-		fixed short undo_rec_nkTextUndoRecord[99 * 5]; // ...?
+		fixed short undo_rec_nkTextUndoRecord[99 * 6]; // ...?
 		fixed uint undo_char[999];
 		short undo_point;
 		short redo_point;

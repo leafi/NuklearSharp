@@ -331,6 +331,59 @@ namespace NuklearSharp
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
+	public unsafe struct nk_table {
+		uint seq;
+		uint size;
+		// nk_hash keys[(((((sizeof(struct nk_window)) < (sizeof(struct nk_panel)) ? (sizeof(struct nk_panel)) : (sizeof(struct nk_window))) / sizeof(nk_uint))) / 2)];
+		// nk_window: c# size 472, C size 472
+		// nk_panel: c# size 448, C size 448
+		// => nk_hash keys[(((472 < 448 ? 448 : 472) / 4) / 2)]
+		// => nk_hash keys[((472 / 4) / 2)]
+		// => nk_hash keys[472 / 8]
+		fixed uint keys_nkhash[472 / 8];
+		// nk_uint values[(((((sizeof(struct nk_window)) < (sizeof(struct nk_panel)) ? (sizeof(struct nk_panel)) : (sizeof(struct nk_window))) / sizeof(nk_uint))) / 2)];
+		fixed uint values[472 / 8];
+		nk_table* next;
+		nk_table* prev;
+	}
+
+	[StructLayout(LayoutKind.Explicit)]
+	public unsafe struct nk_page_data {
+		[FieldOffset(0)]
+		nk_table tbl;
+		[FieldOffset(0)]
+		nk_panel pan;
+		[FieldOffset(0)]
+		nk_window win;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe struct nk_page_element {
+		nk_page_data data;
+		nk_page_element* next;
+		nk_page_element* prev;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe struct nk_page {
+		uint size;
+		nk_page* next;
+		nk_page_element win0;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe struct nk_pool {
+		nk_allocator alloc;
+		nk_allocation_type type;
+		uint page_count;
+		nk_page* pages;
+		nk_page_element* freelist;
+		uint capacity;
+		IntPtr size_nksize;
+		IntPtr cap_nksize;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
 	public unsafe struct nk_context {
 		nk_input input;
 		nk_style style;
@@ -351,13 +404,12 @@ namespace NuklearSharp
 
 		int build;
 		int use_pool;
-		IntPtr pool_nkpool;
+		nk_pool pool;
 		nk_window* begin;
 		nk_window* end;
 		nk_window* active;
 		nk_window* current;
-		//nk_page_element* frelist
-		IntPtr freelist_nkpageelement;
+		nk_page_element* freelist;
 		uint count;
 		uint seq;
 	}

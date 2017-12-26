@@ -220,7 +220,7 @@ namespace NuklearSharp
 		nk_edit_state edit;
 		uint scrolled;
 
-		IntPtr tables_nkTable;
+		nk_table* tables;
 		uint table_count;
 
 		nk_window* next;

@@ -115,8 +115,8 @@ int main() {
   if (16 != sizeof(struct nk_config_stack_vec2_element)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
   printf("nk_configuration_stacks: c# size 2744, C size %lu\n", sizeof(struct nk_configuration_stacks));
   if (2744 != sizeof(struct nk_configuration_stacks)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
-  printf("nk_context: c# size 16384, C size %lu\n", sizeof(struct nk_context));
-  if (16384 != sizeof(struct nk_context)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
+  printf("nk_context: c# size 16640, C size %lu\n", sizeof(struct nk_context));
+  if (16640 != sizeof(struct nk_context)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
   printf("nk_convert_config: c# size 64, C size %lu\n", sizeof(struct nk_convert_config));
   if (64 != sizeof(struct nk_convert_config)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
   printf("nk_convert_result: c# size 4, C size %lu\n", sizeof(enum nk_convert_result));
@@ -191,6 +191,12 @@ int main() {
   if (16 != sizeof(struct nk_mouse_button)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
   printf("nk_orientation: c# size 4, C size %lu\n", sizeof(enum nk_orientation));
   if (4 != sizeof(enum nk_orientation)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
+  printf("nk_page: c# size 528, C size %lu\n", sizeof(struct nk_page));
+  if (528 != sizeof(struct nk_page)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
+  printf("nk_page_data: c# size 496, C size %lu\n", sizeof(union nk_page_data));
+  if (496 != sizeof(union nk_page_data)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
+  printf("nk_page_element: c# size 512, C size %lu\n", sizeof(struct nk_page_element));
+  if (512 != sizeof(struct nk_page_element)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
   printf("nk_panel: c# size 448, C size %lu\n", sizeof(struct nk_panel));
   if (448 != sizeof(struct nk_panel)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
   printf("nk_panel_flags: c# size 4, C size %lu\n", sizeof(enum nk_panel_flags));
@@ -201,6 +207,8 @@ int main() {
   if (4 != sizeof(enum nk_panel_set)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
   printf("nk_panel_type: c# size 4, C size %lu\n", sizeof(enum nk_panel_type));
   if (4 != sizeof(enum nk_panel_type)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
+  printf("nk_pool: c# size 72, C size %lu\n", sizeof(struct nk_pool));
+  if (72 != sizeof(struct nk_pool)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
   printf("nk_popup_buffer: c# size 40, C size %lu\n", sizeof(struct nk_popup_buffer));
   if (40 != sizeof(struct nk_popup_buffer)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
   printf("nk_popup_state: c# size 96, C size %lu\n", sizeof(struct nk_popup_state));
@@ -265,20 +273,22 @@ int main() {
   if (504 != sizeof(struct nk_style_window_header)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
   printf("nk_symbol_type: c# size 4, C size %lu\n", sizeof(enum nk_symbol_type));
   if (4 != sizeof(enum nk_symbol_type)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
+  printf("nk_table: c# size 496, C size %lu\n", sizeof(struct nk_table));
+  if (496 != sizeof(struct nk_table)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
   printf("nk_text_align: c# size 4, C size %lu\n", sizeof(enum nk_text_align));
   if (4 != sizeof(enum nk_text_align)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
   printf("nk_text_alignment: c# size 4, C size %lu\n", sizeof(enum nk_text_alignment));
   if (4 != sizeof(enum nk_text_alignment)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
-  printf("nk_text_edit: c# size 5192, C size %lu\n", sizeof(struct nk_text_edit));
-  if (5192 != sizeof(struct nk_text_edit)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
+  printf("nk_text_edit: c# size 5384, C size %lu\n", sizeof(struct nk_text_edit));
+  if (5384 != sizeof(struct nk_text_edit)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
   printf("nk_text_edit_mode: c# size 4, C size %lu\n", sizeof(enum nk_text_edit_mode));
   if (4 != sizeof(enum nk_text_edit_mode)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
   printf("nk_text_edit_type: c# size 4, C size %lu\n", sizeof(enum nk_text_edit_type));
   if (4 != sizeof(enum nk_text_edit_type)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
   printf("nk_text_undo_record: c# size 12, C size %lu\n", sizeof(struct nk_text_undo_record));
   if (12 != sizeof(struct nk_text_undo_record)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
-  printf("nk_text_undo_state: c# size 4996, C size %lu\n", sizeof(struct nk_text_undo_state));
-  if (4996 != sizeof(struct nk_text_undo_state)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
+  printf("nk_text_undo_state: c# size 5192, C size %lu\n", sizeof(struct nk_text_undo_state));
+  if (5192 != sizeof(struct nk_text_undo_state)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
   printf("nk_tree_type: c# size 4, C size %lu\n", sizeof(enum nk_tree_type));
   if (4 != sizeof(enum nk_tree_type)) { printf("!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\n"); }
   printf("nk_user_font: c# size 40, C size %lu\n", sizeof(struct nk_user_font));
