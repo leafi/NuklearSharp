@@ -25,14 +25,29 @@ namespace NuklearSharp
 			// Useful for debugging, or so I hope... as of writing my nk_context struct is a few hundred bytes out
 
 			Dictionary<string, int> sizes = new Dictionary<string, int>();
+			Dictionary<string, string> structPfx = new Dictionary<string, string>();
 
 			var ass = Assembly.GetAssembly(typeof(NuklearNative));
 			foreach (var ty in ass.DefinedTypes) {
-				if (ty.IsValueType && !ty.IsEnum && ty.Name.StartsWith("nk_", System.StringComparison.Ordinal) && !ty.Name.Contains("<") && !ty.Name.Contains("`")) {
-					sizes[ty.Name] = Marshal.SizeOf(ty.UnderlyingSystemType);
+				if (ty.IsValueType && ty.Name.StartsWith("nk_", System.StringComparison.Ordinal) && !ty.Name.Contains("<") && !ty.Name.Contains("`")) {
+					if (ty.Name == "nk_bool") {
+						continue;  // not a real nuklear C type
+					}
+					if (ty.IsEnum) {
+						structPfx[ty.Name] = "enum";
+						sizes[ty.Name] = Marshal.SizeOf(ty.GetEnumUnderlyingType());
+					} else {
+						if (ty.Name == "nk_style_item_data") {
+							structPfx[ty.Name] = "union";
+						} else if (ty.Name == "nk_handle" || ty.Name == "nk_glyph") {
+							structPfx[ty.Name] = "";
+						} else {
+							structPfx[ty.Name] = "struct";
+						}
+						sizes[ty.Name] = Marshal.SizeOf(ty.UnderlyingSystemType);
+					}
 				}
 			}
-
 
 			StringBuilder sb = new StringBuilder();
 			sb.AppendLine("#include \"nuklear_impl.c\"");
@@ -45,9 +60,8 @@ namespace NuklearSharp
 			var lkeys = new List<string>(sizes.Keys);
 			lkeys.Sort();
 			foreach (var k in lkeys) {
-				string structPfx = (k == "nk_style_item_data") ? "union" : ((k == "nk_handle") || (k == "nk_glyph")) ? "" : "struct";
-				sb.AppendLine($"  printf(\"{k}: c# size {sizes[k]}, C size %lu\\n\", sizeof({structPfx} {k}));");
-				sb.AppendLine($"  if ({sizes[k]} != sizeof({structPfx} {k})) {{ printf(\"!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\\n\"); }}");
+				sb.AppendLine($"  printf(\"{k}: c# size {sizes[k]}, C size %lu\\n\", sizeof({structPfx[k]} {k}));");
+				sb.AppendLine($"  if ({sizes[k]} != sizeof({structPfx[k]} {k})) {{ printf(\"!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!\\n\"); }}");
 			}
 			sb.AppendLine("  return 0;");
 			sb.AppendLine("}");

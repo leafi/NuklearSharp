@@ -20,7 +20,7 @@ namespace NuklearSharp
 		IntPtr free_nkpluginfreet;
 	}
 
-	public enum nk_symbol_type : byte {
+	public enum nk_symbol_type {
 		NK_SYMBOL_NONE,
 		NK_SYMBOL_X,
 		NK_SYMBOL_UNDERSCORE,
@@ -49,12 +49,12 @@ namespace NuklearSharp
 		IntPtr calls;
 	}
 
-	public enum nk_allocation_type : byte {
+	public enum nk_allocation_type : int {
 		NK_BUFFER_FIXED,
 		NK_BUFFER_DYNAMIC
 	}
 
-	public enum nk_buffer_allocation_type : byte {
+	public enum nk_buffer_allocation_type : int {
 		NK_BUFFER_FRONT,
 		NK_BUFFER_BACK,
 		NK_BUFFER_MAX
@@ -136,8 +136,8 @@ namespace NuklearSharp
 
 	[StructLayout(LayoutKind.Sequential)]
 	public unsafe struct nk_config_stack_button_behavior_element {
-		nk_button_behaviour* address;
-		nk_button_behaviour old_value;
+		nk_button_behavior* address;
+		nk_button_behavior old_value;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
@@ -337,7 +337,7 @@ namespace NuklearSharp
 		nk_buffer memory;
 		nk_clipboard clip;
 		uint last_widget_state_nkflags;
-		nk_button_behaviour button_behavior;
+		nk_button_behavior button_behavior;
 		nk_configuration_stacks stacks;
 		float delta_time_Seconds;
 

@@ -37,12 +37,12 @@ namespace NuklearSharp
 		short redo_char_point;
 	}
 
-	public enum nk_text_edit_type : byte {
+	public enum nk_text_edit_type {
 		NK_TEXT_EDIT_SINGLE_LINE,
 		NK_TEXT_EDIT_MULTI_LINE
 	}
 
-	public enum nk_text_edit_mode : byte {
+	public enum nk_text_edit_mode {
 		NK_TEXT_EDIT_MODE_VIEW,
 		NK_TEXT_EDIT_MODE_INSERT,
 		NK_TEXT_EDIT_MODE_REPLACE

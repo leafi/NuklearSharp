@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace NuklearSharp
 {
-	public enum nk_bool : byte {
+	public enum nk_bool {
 		nk_false,
 		nk_true
 	}
@@ -94,65 +94,65 @@ namespace NuklearSharp
 
 	/* ... */
 
-	public enum nk_heading : byte {
+	public enum nk_heading {
 		NK_UP,
 		NK_RIGHT,
 		NK_DOWN,
 		NK_LEFT
 	}
 
-	public enum nk_button_behaviour : byte {
+	public enum nk_button_behavior {
 		NK_BUTTON_DEFAULT,
 		NK_BUTTON_REPEATER
 	}
 
-	public enum nk_modify : byte {
+	public enum nk_modify {
 		NK_FIXED = nk_bool.nk_false,
 		NK_MODIFIABLE = nk_bool.nk_true
 	}
 
-	public enum nk_orientation : byte {
+	public enum nk_orientation {
 		NK_VERTICAL,
 		NK_HORIZONTAL
 	}
 
-	public enum nk_collapse_states : byte {
+	public enum nk_collapse_states {
 		NK_MINIMIZED = nk_bool.nk_false,
 		NK_MAXIMIZED = nk_bool.nk_true
 	}
 
-	public enum nk_show_states : byte {
+	public enum nk_show_states {
 		NK_HIDDEN = nk_bool.nk_false,
 		NK_SHOWN = nk_bool.nk_true
 	}
 
-	public enum nk_chart_type : byte {
+	public enum nk_chart_type {
 		NK_CHART_LINES,
 		NK_CHART_COLUMN,
 		NK_CHART_MAX
 	}
 
-	public enum nk_chart_event : byte {
+	public enum nk_chart_event {
 		NK_CHART_HOVERING = 0x01,
 		NK_CHART_CLICKED = 0x02
 	}
 
-	public enum nk_color_format : byte {
+	public enum nk_color_format {
 		NK_RGB,
 		NK_RGBA
 	}
 
-	public enum nk_popup_type : byte {
+	public enum nk_popup_type {
 		NK_POPUP_STATIC,
 		NK_POPUP_DYNAMIC
 	}
 
-	public enum nk_layout_format : byte {
+	public enum nk_layout_format {
 		NK_DYNAMIC,
 		NK_STATIC
 	}
 
-	public enum nk_tree_type : byte {
+	public enum nk_tree_type {
 		NK_TREE_NODE,
 		NK_TREE_TAB
 	}

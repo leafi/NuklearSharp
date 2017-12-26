@@ -3,13 +3,13 @@ using System.Runtime.InteropServices;
 
 namespace NuklearSharp
 {
-	public enum nk_anti_aliasing : byte {
+	public enum nk_anti_aliasing {
 		NK_ANTI_ALIASING_OFF,
 		NK_ANTI_ALIASING_ON
 	}
 
 	[Flags]
-	public enum nk_convert_result : byte {
+	public enum nk_convert_result {
 		NK_CONVERT_SUCCESS = 0,
 		NK_CONVERT_INVALID_PARAM = 1,
 		NK_CONVERT_COMMAND_BUFFER_FULL = (1 << (1)),
@@ -37,7 +37,7 @@ namespace NuklearSharp
 		IntPtr vertex_alignment;
 	}
 
-	public enum nk_command_type : byte {
+	public enum nk_command_type {
 		NK_COMMAND_NOP,
 		NK_COMMAND_SCISSOR,
 		NK_COMMAND_LINE,
@@ -257,7 +257,7 @@ namespace NuklearSharp
 		byte stringFirstByte;
 	}
 
-	public enum nk_command_clipping : byte {
+	public enum nk_command_clipping {
 		NK_CLIPPING_OFF = nk_bool.nk_false,
 		NK_CLIPPING_ON = nk_bool.nk_true
 	}
@@ -275,19 +275,19 @@ namespace NuklearSharp
 
 	/* nk_draw_index -> nk_ushort */
 
-	public enum nk_draw_list_stroke : byte {
+	public enum nk_draw_list_stroke {
 		NK_STROKE_OPEN = nk_bool.nk_false,
 		NK_STROKE_CLOSED = nk_bool.nk_true
 	}
 
-	public enum nk_draw_vertex_layout_attribute : byte {
+	public enum nk_draw_vertex_layout_attribute {
 		NK_VERTEX_POSITION,
 		NK_VERTEX_COLOR,
 		NK_VERTEX_TEXCOORD,
 		NK_VERTEX_ATTRIBUTE_COUNT
 	}
 
-	public enum nk_draw_vertex_layout_format : byte {
+	public enum nk_draw_vertex_layout_format {
 		NK_FORMAT_SCHAR,
 		NK_FORMAT_SSHORT,
 		NK_FORMAT_SINT,

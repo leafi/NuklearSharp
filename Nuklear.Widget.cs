@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace NuklearSharp
 {
 	[Flags]
-	public enum nk_panel_flags : short
+	public enum nk_panel_flags
 	{
 		NK_WINDOW_BORDER = (1 << (0)),
 		NK_WINDOW_MOVABLE = (1 << (1)),
@@ -20,7 +20,7 @@ namespace NuklearSharp
 	}
 
 	[Flags]
-	public enum nk_panel_type : byte
+	public enum nk_panel_type
 	{
 		NK_PANEL_WINDOW = (1 << (0)),
 		NK_PANEL_GROUP = (1 << (1)),
@@ -31,7 +31,7 @@ namespace NuklearSharp
 		NK_PANEL_TOOLTIP = (1 << (7))
 	}
 
-	public enum nk_panel_set : byte
+	public enum nk_panel_set
 	{
 		NK_PANEL_SET_NONBLOCK = nk_panel_type.NK_PANEL_CONTEXTUAL | nk_panel_type.NK_PANEL_COMBO | nk_panel_type.NK_PANEL_MENU | nk_panel_type.NK_PANEL_TOOLTIP,
 		NK_PANEL_SET_POPUP = NK_PANEL_SET_NONBLOCK | nk_panel_type.NK_PANEL_POPUP,
@@ -66,7 +66,7 @@ namespace NuklearSharp
 		nk_chart_slot slot3;
 	}
 
-	public enum nk_panel_row_layout_type : byte
+	public enum nk_panel_row_layout_type
 	{
 		NK_LAYOUT_DYNAMIC_FIXED = 0,
 		NK_LAYOUT_DYNAMIC_ROW,
@@ -240,14 +240,14 @@ namespace NuklearSharp
 		uint scroll_value;
 	}
 
-	public enum nk_widget_layout_states : byte {
+	public enum nk_widget_layout_states {
 		NK_WIDGET_INVALID,
 		NK_WIDGET_VALID,
 		NK_WIDGET_ROM
 	}
 
 	[Flags]
-	public enum nk_widget_states : byte {
+	public enum nk_widget_states {
 		NK_WIDGET_STATE_MODIFIED = (1 << (1)),
 		NK_WIDGET_STATE_INACTIVE = (1 << (2)),
 		NK_WIDGET_STATE_ENTERED = (1 << (3)),
@@ -259,7 +259,7 @@ namespace NuklearSharp
 	}
 
 	[Flags]
-	public enum nk_text_align : byte {
+	public enum nk_text_align {
 		NK_TEXT_ALIGN_LEFT = 0x01,
 		NK_TEXT_ALIGN_CENTERED = 0x02,
 		NK_TEXT_ALIGN_RIGHT = 0x04,
@@ -268,14 +268,14 @@ namespace NuklearSharp
 		NK_TEXT_ALIGN_BOTTOM = 0x20
 	}
 
-	public enum nk_text_alignment : byte {
+	public enum nk_text_alignment {
 		NK_TEXT_LEFT = nk_text_align.NK_TEXT_ALIGN_MIDDLE | nk_text_align.NK_TEXT_ALIGN_LEFT,
 		NK_TEXT_CENTERED = nk_text_align.NK_TEXT_ALIGN_MIDDLE | nk_text_align.NK_TEXT_ALIGN_CENTERED,
 		NK_TEXT_RIGHT = nk_text_align.NK_TEXT_ALIGN_MIDDLE | nk_text_align.NK_TEXT_ALIGN_RIGHT
 	}
 
 	[Flags]
-	public enum nk_edit_flags : short {
+	public enum nk_edit_flags {
 		NK_EDIT_DEFAULT = 0,
 		NK_EDIT_READ_ONLY = (1 << (0)),
 		NK_EDIT_AUTO_SELECT = (1 << (1)),
@@ -291,7 +291,7 @@ namespace NuklearSharp
 		NK_EDIT_GOTO_END_ON_ACTIVATE = (1 << (11))
 	}
 
-	public enum nk_edit_types : short {
+	public enum nk_edit_types {
 		NK_EDIT_SIMPLE = nk_edit_flags.NK_EDIT_ALWAYS_INSERT_MODE,
 		NK_EDIT_FIELD = NK_EDIT_SIMPLE | nk_edit_flags.NK_EDIT_SELECTABLE | nk_edit_flags.NK_EDIT_CLIPBOARD,
 		NK_EDIT_BOX = nk_edit_flags.NK_EDIT_ALWAYS_INSERT_MODE | nk_edit_flags.NK_EDIT_SELECTABLE | nk_edit_flags.NK_EDIT_MULTILINE | nk_edit_flags.NK_EDIT_ALLOW_TAB | nk_edit_flags.NK_EDIT_CLIPBOARD,
@@ -299,7 +299,7 @@ namespace NuklearSharp
 	}
 
 	[Flags]
-	public enum nk_edit_events : byte {
+	public enum nk_edit_events {
 		NK_EDIT_ACTIVE = (1 << (0)),
 		NK_EDIT_INACTIVE = (1 << (1)),
 		NK_EDIT_ACTIVATED = (1 << (2)),
@@ -401,8 +401,8 @@ namespace NuklearSharp
 		private delegate int nk_button_symbol_label_styled_t(nk_context* ctx, nk_style_button* bstyle, nk_symbol_type stype, byte* title, uint align_nkflags);
 		private delegate int nk_button_image_label_styled_t(nk_context* ctx, nk_style_button* bstyle, nk_image img, byte* s, uint text_alignment_nkflags);
 		private delegate int nk_button_image_text_styled_t(nk_context* ctx, nk_style_button* bstyle, nk_image img, byte* s, int i, uint alignment_nkflags);
-		private delegate void nk_button_set_behavior_t(nk_context* ctx, nk_button_behaviour behavior);
-		private delegate int nk_button_push_behavior_t(nk_context* ctx, nk_button_behaviour behavior);
+		private delegate void nk_button_set_behavior_t(nk_context* ctx, nk_button_behavior behavior);
+		private delegate int nk_button_push_behavior_t(nk_context* ctx, nk_button_behavior behavior);
 		private delegate int nk_button_pop_behavior_t(nk_context* ctx);
 
 		private delegate int nk_check_label_t(nk_context* ctx, byte* s, int active);
@@ -803,8 +803,8 @@ namespace NuklearSharp
 		public static int nk_button_symbol_label_styled(nk_context* ctx, nk_style_button* bstyle, nk_symbol_type stype, byte* title, uint align_nkflags) => _nk_button_symbol_label_styled(ctx, bstyle, stype, title, align_nkflags);
 		public static int nk_button_image_label_styled(nk_context* ctx, nk_style_button* bstyle, nk_image img, byte* s, uint text_alignment_nkflags) => _nk_button_image_label_styled(ctx, bstyle, img, s, text_alignment_nkflags);
 		public static int nk_button_image_text_styled(nk_context* ctx, nk_style_button* bstyle, nk_image img, byte* s, int i, uint alignment_nkflags) => _nk_button_image_text_styled(ctx, bstyle, img, s, i, alignment_nkflags);
-		public static void nk_button_set_behavior(nk_context* ctx, nk_button_behaviour behavior) => _nk_button_set_behavior(ctx, behavior);
-		public static int nk_button_push_behavior(nk_context* ctx, nk_button_behaviour behavior) => _nk_button_push_behavior(ctx, behavior);
+		public static void nk_button_set_behavior(nk_context* ctx, nk_button_behavior behavior) => _nk_button_set_behavior(ctx, behavior);
+		public static int nk_button_push_behavior(nk_context* ctx, nk_button_behavior behavior) => _nk_button_push_behavior(ctx, behavior);
 		public static int nk_button_pop_behavior(nk_context* ctx) => _nk_button_pop_behavior(ctx);
 		public static int nk_check_label(nk_context* ctx, byte* s, int active) => _nk_check_label(ctx, s, active);
 		public static int nk_check_text(nk_context* ctx, byte* s, int i, int active) => _nk_check_text(ctx, s, i, active);

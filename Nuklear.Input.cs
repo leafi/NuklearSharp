@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace NuklearSharp
 {
-	public enum nk_keys : byte {
+	public enum nk_keys {
 		NK_KEY_NONE,
 		NK_KEY_SHIFT,
 		NK_KEY_CTRL,
@@ -39,7 +39,7 @@ namespace NuklearSharp
 		NK_KEY_MAX
 	}
 
-	public enum nk_buttons : byte {
+	public enum nk_buttons {
 		NK_BUTTON_LEFT,
 		NK_BUTTON_MIDDLE,
 		NK_BUTTON_RIGHT,
@@ -80,7 +80,7 @@ namespace NuklearSharp
 
 	[StructLayout(LayoutKind.Sequential)]
 	public unsafe struct nk_keyboard {
-		fixed long keysCastMeToNkKey[(int)(nk_keys.NK_KEY_MAX)];
+		fixed uint keysCastTwoOfMeToOneNkKey[2 * (int)(nk_keys.NK_KEY_MAX)];
 		fixed byte text[16];
 		int text_len;
 	}

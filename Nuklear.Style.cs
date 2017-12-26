@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace NuklearSharp
 {
-	public enum nk_style_item_type : byte {
+	public enum nk_style_item_type {
 		NK_STYLE_ITEM_COLOR,
 		NK_STYLE_ITEM_IMAGE
 	}
@@ -313,7 +313,7 @@ namespace NuklearSharp
 		nk_vec2 spacing;
 	}
 
-	public enum nk_style_header_align : byte {
+	public enum nk_style_header_align {
 		NK_HEADER_LEFT,
 		NK_HEADER_RIGHT
 	}
@@ -414,7 +414,7 @@ namespace NuklearSharp
 		nk_style_window window;
 	}
 
-	public enum nk_style_colors : byte {
+	public enum nk_style_colors {
 		NK_COLOR_TEXT,
 		NK_COLOR_WINDOW,
 		NK_COLOR_HEADER,
@@ -446,7 +446,7 @@ namespace NuklearSharp
 		NK_COLOR_COUNT
 	}
 
-	public enum nk_style_cursor : byte {
+	public enum nk_style_cursor {
 		NK_CURSOR_ARROW,
 		NK_CURSOR_TEXT,
 		NK_CURSOR_MOVE,

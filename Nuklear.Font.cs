@@ -25,7 +25,7 @@ namespace NuklearSharp
 		nk_handle texture;
 	}
 
-	public enum nk_font_coord_type : byte {
+	public enum nk_font_coord_type {
 		NK_COORD_UV,
 		NK_COORD_PIXEL
 	}
@@ -91,7 +91,7 @@ namespace NuklearSharp
 		nk_font_config* config;
 	}
 
-	public enum nk_font_atlas_format : byte {
+	public enum nk_font_atlas_format {
 		NK_FONT_ATLAS_ALPHA8,
 		NK_FONT_ATLAS_RGBA32
 	}
