@@ -1,0 +1,10 @@
+commit b6e0e34c9c50cfd75a521f009518aff3d54030b9 (HEAD -> master, origin/master, origin/HEAD)
+Author: vurtun <micha.mettke@gmail.com>
+Date:   Sat Dec 23 17:34:41 2017 +0100
+
+Fixed #582 nk_edit_buffer behavior
+
+Fixed bug in nk_edit_buffer that prevents input after activating the
+widget. It was caused but not correctly setting an internal flag for
+input.
+
