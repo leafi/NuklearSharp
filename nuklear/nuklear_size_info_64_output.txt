@@ -1,14 +1,23 @@
 
 Before we begin: SIZE OF UINTPTR_T: C# 8 bytes, C 8 bytes
 ==========
+nk_allocation_type: c# size 4, C size 4
 nk_allocator: c# size 24, C size 24
+nk_anti_aliasing: c# size 4, C size 4
 nk_baked_font: c# size 32, C size 32
 nk_buffer: c# size 120, C size 120
+nk_buffer_allocation_type: c# size 4, C size 4
 nk_buffer_marker: c# size 16, C size 16
+nk_button_behavior: c# size 4, C size 4
+nk_buttons: c# size 4, C size 4
 nk_chart: c# size 180, C size 180
+nk_chart_event: c# size 4, C size 4
 nk_chart_slot: c# size 40, C size 40
+nk_chart_type: c# size 4, C size 4
 nk_clipboard: c# size 24, C size 24
+nk_collapse_states: c# size 4, C size 4
 nk_color: c# size 4, C size 4
+nk_color_format: c# size 4, C size 4
 nk_colorf: c# size 16, C size 16
 nk_command: c# size 24, C size 24
 nk_command_arc: c# size 48, C size 48
@@ -16,6 +25,7 @@ nk_command_arc_filled: c# size 48, C size 48
 nk_command_buffer: c# size 64, C size 64
 nk_command_circle: c# size 40, C size 40
 nk_command_circle_filled: c# size 40, C size 40
+nk_command_clipping: c# size 4, C size 4
 nk_command_curve: c# size 48, C size 48
 nk_command_custom: c# size 48, C size 48
 nk_command_image: c# size 64, C size 64
@@ -30,6 +40,7 @@ nk_command_scissor: c# size 32, C size 32
 nk_command_text: c# size 64, C size 64
 nk_command_triangle: c# size 48, C size 48
 nk_command_triangle_filled: c# size 40, C size 40
+nk_command_type: c# size 4, C size 4
 nk_config_stack_button_behavior: c# size 136, C size 136
 nk_config_stack_button_behavior_element: c# size 16, C size 16
 nk_config_stack_color: c# size 520, C size 520
@@ -45,71 +56,99 @@ nk_config_stack_user_font_element: c# size 16, C size 16
 nk_config_stack_vec2: c# size 264, C size 264
 nk_config_stack_vec2_element: c# size 16, C size 16
 nk_configuration_stacks: c# size 2744, C size 2744
-nk_context: c# size 16360, C size 16640
-!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!
+nk_context: c# size 16640, C size 16640
 nk_convert_config: c# size 64, C size 64
+nk_convert_result: c# size 4, C size 4
 nk_cursor: c# size 40, C size 40
 nk_draw_command: c# size 40, C size 40
 nk_draw_list: c# size 248, C size 248
+nk_draw_list_stroke: c# size 4, C size 4
 nk_draw_null_texture: c# size 16, C size 16
+nk_draw_vertex_layout_attribute: c# size 4, C size 4
 nk_draw_vertex_layout_element: c# size 16, C size 16
+nk_draw_vertex_layout_format: c# size 4, C size 4
+nk_edit_events: c# size 4, C size 4
+nk_edit_flags: c# size 4, C size 4
 nk_edit_state: c# size 44, C size 44
+nk_edit_types: c# size 4, C size 4
 nk_font: c# size 128, C size 128
 nk_font_atlas: c# size 400, C size 400
+nk_font_atlas_format: c# size 4, C size 4
 nk_font_config: c# size 88, C size 88
+nk_font_coord_type: c# size 4, C size 4
 nk_font_glyph: c# size 48, C size 48
 nk_glyph: c# size 4, C size 4
 nk_handle: c# size 8, C size 8
+nk_heading: c# size 4, C size 4
 nk_image: c# size 24, C size 24
-nk_input: c# size 368, C size 360
-!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!
+nk_input: c# size 360, C size 360
 nk_key: c# size 8, C size 8
-nk_keyboard: c# size 264, C size 260
-!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!
+nk_keyboard: c# size 260, C size 260
+nk_keys: c# size 4, C size 4
+nk_layout_format: c# size 4, C size 4
 nk_list_view: c# size 40, C size 40
 nk_memory: c# size 16, C size 16
 nk_memory_status: c# size 48, C size 48
 nk_menu_state: c# size 24, C size 24
+nk_modify: c# size 4, C size 4
 nk_mouse: c# size 100, C size 100
 nk_mouse_button: c# size 16, C size 16
+nk_orientation: c# size 4, C size 4
+nk_page: c# size 528, C size 528
+nk_page_data: c# size 496, C size 496
+nk_page_element: c# size 512, C size 512
 nk_panel: c# size 448, C size 448
+nk_panel_flags: c# size 4, C size 4
+nk_panel_row_layout_type: c# size 4, C size 4
+nk_panel_set: c# size 4, C size 4
+nk_panel_type: c# size 4, C size 4
+nk_pool: c# size 72, C size 72
 nk_popup_buffer: c# size 40, C size 40
 nk_popup_state: c# size 96, C size 96
+nk_popup_type: c# size 4, C size 4
 nk_property_state: c# size 104, C size 104
 nk_rect: c# size 16, C size 16
 nk_recti: c# size 8, C size 8
 nk_row_layout: c# size 136, C size 136
 nk_scroll: c# size 8, C size 8
+nk_show_states: c# size 4, C size 4
 nk_str: c# size 128, C size 128
-nk_style: c# size 7512, C size 7544
-!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!
+nk_style: c# size 7544, C size 7544
 nk_style_button: c# size 176, C size 176
 nk_style_chart: c# size 64, C size 64
-nk_style_combo: c# size 344, C size 352
-!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!
+nk_style_colors: c# size 4, C size 4
+nk_style_combo: c# size 352, C size 352
+nk_style_cursor: c# size 4, C size 4
 nk_style_edit: c# size 800, C size 800
+nk_style_header_align: c# size 4, C size 4
 nk_style_item: c# size 32, C size 32
 nk_style_item_data: c# size 24, C size 24
+nk_style_item_type: c# size 4, C size 4
 nk_style_progress: c# size 256, C size 256
 nk_style_property: c# size 1312, C size 1312
 nk_style_scrollbar: c# size 616, C size 616
 nk_style_selectable: c# size 280, C size 280
 nk_style_slider: c# size 640, C size 640
-nk_style_tab: c# size 776, C size 784
-!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!
+nk_style_tab: c# size 784, C size 784
 nk_style_text: c# size 12, C size 12
 nk_style_toggle: c# size 240, C size 240
-nk_style_window: c# size 704, C size 720
-!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!
-nk_style_window_header: c# size 488, C size 504
-!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!
-nk_text_edit: c# size 5192, C size 5384
-!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!
+nk_style_window: c# size 720, C size 720
+nk_style_window_header: c# size 504, C size 504
+nk_symbol_type: c# size 4, C size 4
+nk_table: c# size 496, C size 496
+nk_text_align: c# size 4, C size 4
+nk_text_alignment: c# size 4, C size 4
+nk_text_edit: c# size 5384, C size 5384
+nk_text_edit_mode: c# size 4, C size 4
+nk_text_edit_type: c# size 4, C size 4
 nk_text_undo_record: c# size 12, C size 12
-nk_text_undo_state: c# size 4996, C size 5192
-!!!!! ^^^^^ SIZE DIFFERS! ^^^^^ !!!!!
+nk_text_undo_state: c# size 5192, C size 5192
+nk_tree_type: c# size 4, C size 4
 nk_user_font: c# size 40, C size 40
 nk_user_font_glyph: c# size 36, C size 36
 nk_vec2: c# size 8, C size 8
 nk_vec2i: c# size 4, C size 4
+nk_widget_layout_states: c# size 4, C size 4
+nk_widget_states: c# size 4, C size 4
 nk_window: c# size 472, C size 472
+nk_window_flags: c# size 4, C size 4
