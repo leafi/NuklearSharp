@@ -8,7 +8,7 @@ It relies on https://github.com/mellinoe/nativelibraryloader (imported via NuGet
 
 Straight P/Invoke? An actually working sample application?! Yeah, it looks like somebody took my code and got further than I have so far.
 
-Check out their work at https://github.com/cartman300/NuklearDotNet! It looks pretty awesome to me. I am going to steal parts of it back.
+Check out their work at https://github.com/cartman300/NuklearDotNet! It looks pretty awesome to me. I am going to steal parts of it back. Fnar.
 
 ## About NuklearSharp
 
