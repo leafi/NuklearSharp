@@ -2,6 +2,8 @@ This is a set of bindings for https://github.com/vurtun/nuklear written in C# fo
 
 It relies on https://github.com/mellinoe/nativelibraryloader (imported via NuGet) for .NET Core-related reasons.
 
+**Also, consider checking out https://github.com/cartman300/NuklearDotNet ** (which is based on this project, but the author has gotten further than I have. They've got a sample application working! And it's clean P/Invoke. But I'll keep doing my thing here.')
+
 The bindings are low-level. Pointers abound. I tried to write something not wrong, rather than something pleasant to use.
 
 There aren't any samples or anything. I've only just finished writing this.
