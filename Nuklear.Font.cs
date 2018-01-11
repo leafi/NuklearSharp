@@ -5,12 +5,12 @@ namespace NuklearSharp
 {
 	[StructLayout(LayoutKind.Sequential)]
 	public struct nk_user_font_glyph {
-		nk_vec2 u;
-		nk_vec2 v;
-		nk_vec2 offset;
-		float width;
-		float height;
-		float xadvance;
+		public nk_vec2 u;
+		public nk_vec2 v;
+		public nk_vec2 offset;
+		public float width;
+		public float height;
+		public float xadvance;
 	}
 
 	public unsafe delegate float nk_text_width_f(nk_handle handle, float h, byte* s, int len);
@@ -18,11 +18,11 @@ namespace NuklearSharp
 
 	[StructLayout(LayoutKind.Sequential)]
 	public struct nk_user_font {
-		nk_handle userdata;
-		float height;
-		IntPtr widthfun_nkTextWidthF;
-		IntPtr queryfun_nkQueryFontGlyphF;
-		nk_handle texture;
+		public nk_handle userdata;
+		public float height;
+		public IntPtr widthfun_nkTextWidthF;
+		public IntPtr queryfun_nkQueryFontGlyphF;
+		public nk_handle texture;
 	}
 
 	public enum nk_font_coord_type {
@@ -32,63 +32,63 @@ namespace NuklearSharp
 
 	[StructLayout(LayoutKind.Sequential)]
 	public unsafe struct nk_baked_font {
-		float height;
-		float ascent;
-		float descent;
-		uint glyph_offset;
-		uint glyph_count;
-		uint* ranges;
+		public float height;
+		public float ascent;
+		public float descent;
+		public uint glyph_offset;
+		public uint glyph_count;
+		public uint* ranges;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	public unsafe struct nk_font_config {
-		nk_font_config* next;
-		IntPtr ttf_blob;
-		IntPtr ttf_size;
-		byte ttf_data_owned_by_atlas;
-		byte merge_mode;
-		byte pixel_snap;
-		byte oversample_v;
-		byte oversample_h;
-		fixed byte padding[3];
-		float size;
-		nk_font_coord_type coord_type;
-		nk_vec2 spacing;
-		uint* range;
-		nk_baked_font* font;
-		uint fallback_glyph;
+		public nk_font_config* next;
+		public IntPtr ttf_blob;
+		public IntPtr ttf_size;
+		public byte ttf_data_owned_by_atlas;
+		public byte merge_mode;
+		public byte pixel_snap;
+		public byte oversample_v;
+		public byte oversample_h;
+		public fixed byte padding[3];
+		public float size;
+		public nk_font_coord_type coord_type;
+		public nk_vec2 spacing;
+		public uint* range;
+		public nk_baked_font* font;
+		public uint fallback_glyph;
 
-		nk_font_config* n;
-		nk_font_config* p;
+		public nk_font_config* n;
+		public nk_font_config* p;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	public struct nk_font_glyph {
-		uint codepoint;
-		float xadvance;
-		float x0;
-		float y0;
-		float x1;
-		float y1;
-		float w;
-		float h;
-		float u0;
-		float v0;
-		float u1;
-		float v1;
+		public uint codepoint;
+		public float xadvance;
+		public float x0;
+		public float y0;
+		public float x1;
+		public float y1;
+		public float w;
+		public float h;
+		public float u0;
+		public float v0;
+		public float u1;
+		public float v1;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	public unsafe struct nk_font {
-		nk_font* next;
-		nk_user_font handle;
-		nk_baked_font info;
-		float scale;
-		nk_font_glyph* glyphs;
-		nk_font_glyph* fallback;
-		uint fallback_codepoint;
-		nk_handle texture;
-		nk_font_config* config;
+		public nk_font* next;
+		public nk_user_font handle;
+		public nk_baked_font info;
+		public float scale;
+		public nk_font_glyph* glyphs;
+		public nk_font_glyph* fallback;
+		public uint fallback_codepoint;
+		public nk_handle texture;
+		public nk_font_config* config;
 	}
 
 	public enum nk_font_atlas_format {
@@ -98,28 +98,28 @@ namespace NuklearSharp
 
 	[StructLayout(LayoutKind.Sequential)]
 	public unsafe struct nk_font_atlas {
-		IntPtr pixel;
-		int tex_width;
-		int tex_height;
+		public IntPtr pixel;
+		public int tex_width;
+		public int tex_height;
 
-		nk_allocator permanent;
-		nk_allocator temporary;
+		public nk_allocator permanent;
+		public nk_allocator temporary;
 
-		nk_recti custom;
-		nk_cursor cursorArrow;
-		nk_cursor cursorText;
-		nk_cursor cursorMove;
-		nk_cursor cursorResizeV;
-		nk_cursor cursorResizeH;
-		nk_cursor cursorResizeTLDR;
-		nk_cursor cursorResizeTRDL;
+		public nk_recti custom;
+		public nk_cursor cursorArrow;
+		public nk_cursor cursorText;
+		public nk_cursor cursorMove;
+		public nk_cursor cursorResizeV;
+		public nk_cursor cursorResizeH;
+		public nk_cursor cursorResizeTLDR;
+		public nk_cursor cursorResizeTRDL;
 
-		int glyph_count;
-		nk_font_glyph* glyphs;
-		nk_font* default_font;
-		nk_font* fonts;
-		nk_font_config* config;
-		int font_num;
+		public int glyph_count;
+		public nk_font_glyph* glyphs;
+		public nk_font* default_font;
+		public nk_font* fonts;
+		public nk_font_config* config;
+		public int font_num;
 	}
 
 	public static unsafe partial class NuklearNative
