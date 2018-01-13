@@ -34,7 +34,7 @@ namespace NuklearSharp
 
 		private static T LFT<T>()
 		{
-			var s = nameof(T);
+			var s = typeof(T).Name;
 			if (s.EndsWith("_t", StringComparison.Ordinal) && !s.Contains(".")) {
 				return LoadFunction<T>(s.Substring(0, s.Length - 2));
 			} else {
