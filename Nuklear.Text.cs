@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
+using nk_handle = System.IntPtr;
+
 namespace NuklearSharp
 {
 

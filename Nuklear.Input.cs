@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
+using nk_glyph = System.Int32;
+
 namespace NuklearSharp
 {
 	public enum nk_keys {

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
+using nk_handle = System.IntPtr;
+
 namespace NuklearSharp
 {
 	public delegate IntPtr nk_plugin_alloc_t(nk_handle handle, IntPtr old, IntPtr nk_size);
@@ -350,11 +352,11 @@ namespace NuklearSharp
 	[StructLayout(LayoutKind.Explicit)]
 	public unsafe struct nk_page_data {
 		[FieldOffset(0)]
-		public nk_table tbl;
-		[FieldOffset(0)]
 		public nk_panel pan;
 		[FieldOffset(0)]
 		public nk_window win;
+		[FieldOffset(0)]
+		public nk_table tbl;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]

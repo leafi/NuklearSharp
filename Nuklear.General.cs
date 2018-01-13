@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
+using nk_glyph = System.Int32;
+using nk_handle = System.IntPtr;
+
 namespace NuklearSharp
 {
 	public enum nk_bool {
@@ -54,22 +57,28 @@ namespace NuklearSharp
 		public short h;
 	}
 
-	[StructLayout(LayoutKind.Explicit)]
+	// !!!!!!!!!!!!!!!!!!!
+	// XXX: Short unions aren't marshalled properly. Use `using nk_glyph = System.Int32;`.
+	// !!!!!!!!!!!!!!!!!!!
+	/*[StructLayout(LayoutKind.Explicit)]
 	public unsafe struct nk_glyph {
 		[FieldOffset(0)]
 		public fixed byte bytes[4];
 
 		[FieldOffset(0)]
 		public int glyph;
-	}
+	}*/
 
-	[StructLayout(LayoutKind.Explicit)]
+	// !!!!!!!!!!!!
+	// XXX: Short unions aren't marshalled properly. Use `using nk_handle = System.IntPtr;`.
+	// !!!!!!!!!!!!
+	/*[StructLayout(LayoutKind.Explicit)]
 	public struct nk_handle {
 		[FieldOffset(0)]
-		public IntPtr ptr;
-		[FieldOffset(0)]
 		public int id;
-	}
+		[FieldOffset(0)]
+		public IntPtr ptr;
+	}*/
 
 	[StructLayout(LayoutKind.Sequential)]
 	public unsafe struct nk_image {
