@@ -1,0 +1,5 @@
+Built from the nuklear.h on this repo on CentOS 6.10 with GCC...
+
+...which should be old enough that the binary will work anywhere any likely user of this repo would want to use it.
+
+Hopefully, this binary will work back to even Ubuntu 12.04.
