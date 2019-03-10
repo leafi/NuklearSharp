@@ -491,6 +491,7 @@ namespace NuklearSharp
 		private delegate nk_color nk_rgb_t(int r, int g, int b);
 		private delegate nk_color nk_rgb_iv_t(int* rgb);
 		private delegate nk_color nk_rgb_bv_t(byte* rgb);
+		private delegate nk_color nk_rgb_cf_t(nk_colorf c);
 		private delegate nk_color nk_rgb_f_t(float r, float g, float b);
 		private delegate nk_color nk_rgb_fv_t(float* rgb);
 		private delegate nk_color nk_rgb_hex_t(byte* rgb);
@@ -499,6 +500,7 @@ namespace NuklearSharp
 		private delegate nk_color nk_rgba_u32_t(uint rgba);
 		private delegate nk_color nk_rgba_iv_t(int* rgba);
 		private delegate nk_color nk_rgba_bv_t(byte* rgba);
+		private delegate nk_color nk_rgba_cf_t(nk_colorf c);
 		private delegate nk_color nk_rgba_f_t(float r, float g, float b, float a);
 		private delegate nk_color nk_rgba_fv_t(float* rgba);
 		private delegate nk_color nk_rgba_hex_t(float* hsv);
@@ -506,11 +508,14 @@ namespace NuklearSharp
 		private delegate nk_color nk_hsva_t(int h, int s, int v, int a);
 		private delegate nk_color nk_hsva_iv_t(int* hsva);
 		private delegate nk_color nk_hsva_bv_t(byte* hsva);
+		private delegate nk_colorf nk_hsva_colorf_t(float h, float s, float v, float a);
+		private delegate nk_colorf nk_hsva_colorfv_t(float* c);
 		private delegate nk_color nk_hsva_f_t(float h, float s, float v, float a);
 		private delegate nk_color nk_hsva_fv_t(float* hsva);
 
 		private delegate void nk_color_f_t(out float r, out float g, out float b, out float a, nk_color src);
 		private delegate void nk_color_fv_t(float* rgba_out, nk_color src);
+		private delegate nk_colorf nk_color_cf_t(nk_color src);
 		private delegate void nk_color_d_t(out double r, out double g, out double b, out double a, nk_color src);
 		private delegate void nk_color_dv_t(double* rgba_out, nk_color src);
 
@@ -531,6 +536,9 @@ namespace NuklearSharp
 		private delegate void nk_color_hsva_bv_t(byte* hsva_out, nk_color src);
 		private delegate void nk_color_hsva_f_t(out float h, out float s, out float v, out float a, nk_color src);
 		private delegate void nk_color_hsva_fv_t(float* hsva_out, nk_color src);
+
+		private delegate void nk_colorf_hsva_f_t(out float h, out float s, out float v, out float a, nk_colorf src);
+		private delegate void nk_colorf_hsva_fv_t(float* hsva_out, nk_colorf src);
 
 
 
@@ -568,6 +576,7 @@ namespace NuklearSharp
 		private static nk_rgb_t _nk_rgb = LFT<nk_rgb_t>();
 		private static nk_rgb_iv_t _nk_rgb_iv = LFT<nk_rgb_iv_t>();
 		private static nk_rgb_bv_t _nk_rgb_bv = LFT<nk_rgb_bv_t>();
+		private static nk_rgb_cf_t _nk_rgb_cf = LFT<nk_rgb_cf_t>();
 		private static nk_rgb_f_t _nk_rgb_f = LFT<nk_rgb_f_t>();
 		private static nk_rgb_fv_t _nk_rgb_fv = LFT<nk_rgb_fv_t>();
 		private static nk_rgb_hex_t _nk_rgb_hex = LFT<nk_rgb_hex_t>();
@@ -575,16 +584,20 @@ namespace NuklearSharp
 		private static nk_rgba_u32_t _nk_rgba_u32 = LFT<nk_rgba_u32_t>();
 		private static nk_rgba_iv_t _nk_rgba_iv = LFT<nk_rgba_iv_t>();
 		private static nk_rgba_bv_t _nk_rgba_bv = LFT<nk_rgba_bv_t>();
+		private static nk_rgba_cf_t _nk_rgba_cf = LFT<nk_rgba_cf_t>();
 		private static nk_rgba_f_t _nk_rgba_f = LFT<nk_rgba_f_t>();
 		private static nk_rgba_fv_t _nk_rgba_fv = LFT<nk_rgba_fv_t>();
 		private static nk_rgba_hex_t _nk_rgba_hex = LFT<nk_rgba_hex_t>();
 		private static nk_hsva_t _nk_hsva = LFT<nk_hsva_t>();
 		private static nk_hsva_iv_t _nk_hsva_iv = LFT<nk_hsva_iv_t>();
 		private static nk_hsva_bv_t _nk_hsva_bv = LFT<nk_hsva_bv_t>();
+		private static nk_hsva_colorf_t _nk_hsva_colorf = LFT<nk_hsva_colorf_t>();
+		private static nk_hsva_colorfv_t _nk_hsva_colorfv = LFT<nk_hsva_colorfv_t>();
 		private static nk_hsva_f_t _nk_hsva_f = LFT<nk_hsva_f_t>();
 		private static nk_hsva_fv_t _nk_hsva_fv = LFT<nk_hsva_fv_t>();
 		private static nk_color_f_t _nk_color_f = LFT<nk_color_f_t>();
 		private static nk_color_fv_t _nk_color_fv = LFT<nk_color_fv_t>();
+		private static nk_color_cf_t _nk_color_cf = LFT<nk_color_cf_t>();
 		private static nk_color_d_t _nk_color_d = LFT<nk_color_d_t>();
 		private static nk_color_dv_t _nk_color_dv = LFT<nk_color_dv_t>();
 		private static nk_color_u32_t _nk_color_u32 = LFT<nk_color_u32_t>();
@@ -602,6 +615,8 @@ namespace NuklearSharp
 		private static nk_color_hsva_bv_t _nk_color_hsva_bv = LFT<nk_color_hsva_bv_t>();
 		private static nk_color_hsva_f_t _nk_color_hsva_f = LFT<nk_color_hsva_f_t>();
 		private static nk_color_hsva_fv_t _nk_color_hsva_fv = LFT<nk_color_hsva_fv_t>();
+		private static nk_colorf_hsva_f_t _nk_colorf_hsva_f = LFT<nk_colorf_hsva_f_t>();
+		private static nk_colorf_hsva_fv_t _nk_colorf_hsva_fv = LFT<nk_colorf_hsva_fv_t>();
 
 
 
@@ -630,6 +645,7 @@ namespace NuklearSharp
 		public static nk_color nk_rgb(int r, int g, int b) => _nk_rgb(r, g, b);
 		public static nk_color nk_rgb_iv(int* rgb) => _nk_rgb_iv(rgb);
 		public static nk_color nk_rgb_bv(byte* rgb) => _nk_rgb_bv(rgb);
+		public static nk_color nk_rgb_cf(nk_colorf c) => _nk_rgb_cf(c);
 		public static nk_color nk_rgb_f(float r, float g, float b) => _nk_rgb_f(r, g, b);
 		public static nk_color nk_rgb_fv(float* rgb) => _nk_rgb_fv(rgb);
 		public static nk_color nk_rgb_hex(byte* rgb) => _nk_rgb_hex(rgb);
@@ -637,16 +653,20 @@ namespace NuklearSharp
 		public static nk_color nk_rgba_u32(uint rgba) => _nk_rgba_u32(rgba);
 		public static nk_color nk_rgba_iv(int* rgba) => _nk_rgba_iv(rgba);
 		public static nk_color nk_rgba_bv(byte* rgba) => _nk_rgba_bv(rgba);
+		public static nk_color nk_rgba_cf(nk_colorf c) => _nk_rgba_cf(c);
 		public static nk_color nk_rgba_f(float r, float g, float b, float a) => _nk_rgba_f(r, g, b, a);
 		public static nk_color nk_rgba_fv(float* rgba) => _nk_rgba_fv(rgba);
 		public static nk_color nk_rgba_hex(float* hsv) => _nk_rgba_hex(hsv);
 		public static nk_color nk_hsva(int h, int s, int v, int a) => _nk_hsva(h, s, v, a);
 		public static nk_color nk_hsva_iv(int* hsva) => _nk_hsva_iv(hsva);
 		public static nk_color nk_hsva_bv(byte* hsva) => _nk_hsva_bv(hsva);
+		public static nk_colorf nk_hsva_colorf(float h, float s, float v, float a) => _nk_hsva_colorf(h, s, v, a);
+		public static nk_colorf nk_hsva_colorfv(float* c) => _nk_hsva_colorfv(c);
 		public static nk_color nk_hsva_f(float h, float s, float v, float a) => _nk_hsva_f(h, s, v, a);
 		public static nk_color nk_hsva_fv(float* hsva) => _nk_hsva_fv(hsva);
 		public static void nk_color_f(out float r, out float g, out float b, out float a, nk_color src) => _nk_color_f(out r, out g, out b, out a, src);
 		public static void nk_color_fv(float* rgba_out, nk_color src) => _nk_color_fv(rgba_out, src);
+		public static nk_colorf nk_color_cf(nk_color src) => _nk_color_cf(src);
 		public static void nk_color_d(out double r, out double g, out double b, out double a, nk_color src) => _nk_color_d(out r, out g, out b, out a, src);
 		public static void nk_color_dv(double* rgba_out, nk_color src) => _nk_color_dv(rgba_out, src);
 		public static uint nk_color_u32(nk_color src) => _nk_color_u32(src);
@@ -664,6 +684,8 @@ namespace NuklearSharp
 		public static void nk_color_hsva_bv(byte* hsva_out, nk_color src) => _nk_color_hsva_bv(hsva_out, src);
 		public static void nk_color_hsva_f(out float h, out float s, out float v, out float a, nk_color src) => _nk_color_hsva_f(out h, out s, out v, out a, src);
 		public static void nk_color_hsva_fv(float* hsva_out, nk_color src) => _nk_color_hsva_fv(hsva_out, src);
+		public static void nk_colorf_hsva_f(out float h, out float s, out float v, out float a, nk_colorf src) => _nk_colorf_hsva_f(out h, out s, out v, out a, src);
+		public static void nk_colorf_hsva_fv(float* hsva_out, nk_colorf src) => _nk_colorf_hsva_fv(hsva_out, src);
 
 
 

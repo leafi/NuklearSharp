@@ -44,8 +44,7 @@ Thumbs.db
 *.swo
 *.swj
 
-nuklear/*.dylib
-nuklear/nuklear_size_info
-nuklear/nuklear_size_info_32
-nuklear/nuklear_size_info_64
-
+nuklear/work/nuklear_size_info
+nuklear/work/nuklear_size_info_32
+nuklear/work/nuklear_size_info_64
+nuklear/work/nuklear.pre.old

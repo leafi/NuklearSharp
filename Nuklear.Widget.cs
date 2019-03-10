@@ -22,6 +22,7 @@ namespace NuklearSharp
 	[Flags]
 	public enum nk_panel_type
 	{
+		NK_PANEL_NONE = 0,
 		NK_PANEL_WINDOW = (1 << (0)),
 		NK_PANEL_GROUP = (1 << (1)),
 		NK_PANEL_POPUP = (1 << (2)),
@@ -345,8 +346,9 @@ namespace NuklearSharp
 
 
 		private delegate int nk_group_begin_t(nk_context* ctx, byte* title, uint nkflags);
-		private delegate int nk_group_scrolled_offset_begin_t(nk_context* ctx, uint* x_offset, uint* y_offset, byte* s, uint nkflags);
-		private delegate int nk_group_scrolled_begin_t(nk_context* ctx, nk_scroll* scroll, byte* title, uint nkflags);
+		private delegate int nk_group_begin_titled_t(nk_context* ctx, byte* name, byte* title, uint nkflags);
+		private delegate int nk_group_scrolled_offset_begin_t(nk_context* ctx, uint* x_offset, uint* y_offset, byte* title, uint nkflags);
+		private delegate int nk_group_scrolled_begin_t(nk_context* ctx, nk_scroll* off, byte* title, uint nkflags);
 		private delegate void nk_group_scrolled_end_t(nk_context* ctx);
 		private delegate void nk_group_end_t(nk_context* ctx);
 
@@ -359,6 +361,10 @@ namespace NuklearSharp
 		private delegate int nk_tree_state_push_t(nk_context* ctx, nk_tree_type tree_type, byte* title, nk_collapse_states* state);
 		private delegate int nk_tree_state_image_push_t(nk_context* ctx, nk_tree_type tree_type, nk_image img, byte* title, nk_collapse_states* state);
 		private delegate void nk_tree_state_pop_t(nk_context* ctx);
+
+		private delegate int nk_tree_element_push_hashed_t(nk_context* ctx, nk_tree_type ntt, byte* title, nk_collapse_states initial_state, int* selected, byte* hash, int len, int seed);
+		private delegate int nk_tree_element_image_push_hashed_t(nk_context* ctx, nk_tree_type ntt, nk_image img, byte* title, nk_collapse_states initial_state, int* selected, byte* hash, int len, int seed);
+		private delegate void nk_tree_element_pop_t(nk_context* ctx);
 
 		private delegate nk_widget_layout_states nk_widget_t(nk_rect* r, nk_context* ctx);
 		private delegate nk_widget_layout_states nk_widget_fitting_t(nk_rect* r, nk_context* ctx, nk_vec2 v);
@@ -383,6 +389,7 @@ namespace NuklearSharp
 		private delegate void nk_label_wrap_t(nk_context* ctx, byte* s);
 		private delegate void nk_label_colored_wrap_t(nk_context* ctx, byte* s, nk_color color);
 		private delegate void nk_image_t(nk_context* ctx, nk_image img);
+		private delegate void nk_image_color_t(nk_context* ctx, nk_image image, nk_color color);
 
 		private delegate int nk_button_text_t(nk_context* ctx, byte* title, int len);
 		private delegate int nk_button_label_t(nk_context* ctx, byte* title);
@@ -423,10 +430,14 @@ namespace NuklearSharp
 		private delegate int nk_selectable_text_t(nk_context* ctx, byte* s, int i, uint align_nkflags, int* val);
 		private delegate int nk_selectable_image_label_t(nk_context* ctx, nk_image img, byte* s, uint align_nkflags, int* val);
 		private delegate int nk_selectable_image_text_t(nk_context* ctx, nk_image img, byte* s, int i, uint align_nkflags, int* val);
+		private delegate int nk_selectable_symbol_label_t(nk_context* ctx, nk_symbol_type st, byte* s, uint align_nkflags, int* val);
+		private delegate int nk_selectable_symbol_text_t(nk_context* ctx, nk_symbol_type st, byte* s, int i, uint align_nkflags, int* val);
 		private delegate int nk_select_label_t(nk_context* ctx, byte* s, uint align_nkflags, int val);
 		private delegate int nk_select_text_t(nk_context* ctx, byte* s, int i, uint align_nkflags, int val);
 		private delegate int nk_select_image_label_t(nk_context* ctx, nk_image img, byte* s, uint align_nkflags, int val);
 		private delegate int nk_select_image_text_t(nk_context* ctx, nk_image img, byte* s, int i, uint align_nkflags, int val);
+		private delegate int nk_select_symbol_label_t(nk_context* ctx, nk_symbol_type st, byte* s, uint align_nkflags, int val);
+		private delegate int nk_select_symbol_text_t(nk_context* ctx, nk_symbol_type st, byte* s, int i, uint align_nkflags, int val);
 
 		private delegate float nk_slide_float_t(nk_context* ctx, float min, float val, float max, float step);
 		private delegate int nk_slide_int_t(nk_context* ctx, int min, int val, int max, int step);
@@ -436,8 +447,8 @@ namespace NuklearSharp
 		private delegate int nk_progress_t(nk_context* ctx, IntPtr* cur_nksize, IntPtr max_nksize, int modifyable);
 		private delegate IntPtr nk_prog_t(nk_context* ctx, IntPtr cur_nksize, IntPtr max_nksize, int modifyable);
 
-		private delegate nk_color nk_color_picker_t(nk_context* ctx, nk_color color, nk_color_format cfmt);
-		private delegate int nk_color_pick_t(nk_context* ctx, nk_color* color, nk_color_format cfmt);
+		private delegate nk_colorf nk_color_picker_t(nk_context* ctx, nk_colorf color, nk_color_format cfmt);
+		private delegate int nk_color_pick_t(nk_context* ctx, nk_colorf* color, nk_color_format cfmt);
 
 		private delegate void nk_property_int_t(nk_context* ctx, byte* name, int min, int* val, int max, int step, float inc_per_pixel);
 		private delegate void nk_property_float_t(nk_context* ctx, byte* name, float min, float* val, float max, float step, float inc_per_pixel);
@@ -562,6 +573,7 @@ namespace NuklearSharp
 		private static nk_window_show_t _nk_window_show = LFT<nk_window_show_t>();
 		private static nk_window_show_if_t _nk_window_show_if = LFT<nk_window_show_if_t>();
 		private static nk_group_begin_t _nk_group_begin = LFT<nk_group_begin_t>();
+		private static nk_group_begin_titled_t _nk_group_begin_titled = LFT<nk_group_begin_titled_t>();
 		private static nk_group_scrolled_offset_begin_t _nk_group_scrolled_offset_begin = LFT<nk_group_scrolled_offset_begin_t>();
 		private static nk_group_scrolled_begin_t _nk_group_scrolled_begin = LFT<nk_group_scrolled_begin_t>();
 		private static nk_group_scrolled_end_t _nk_group_scrolled_end = LFT<nk_group_scrolled_end_t>();
@@ -574,6 +586,9 @@ namespace NuklearSharp
 		private static nk_tree_state_push_t _nk_tree_state_push = LFT<nk_tree_state_push_t>();
 		private static nk_tree_state_image_push_t _nk_tree_state_image_push = LFT<nk_tree_state_image_push_t>();
 		private static nk_tree_state_pop_t _nk_tree_state_pop = LFT<nk_tree_state_pop_t>();
+		private static nk_tree_element_push_hashed_t _nk_tree_element_push_hashed = LFT<nk_tree_element_push_hashed_t>();
+		private static nk_tree_element_image_push_hashed_t _nk_tree_element_image_push_hashed = LFT<nk_tree_element_image_push_hashed_t>();
+		private static nk_tree_element_pop_t _nk_tree_element_pop = LFT<nk_tree_element_pop_t>();
 		private static nk_widget_t _nk_widget = LFT<nk_widget_t>();
 		private static nk_widget_fitting_t _nk_widget_fitting = LFT<nk_widget_fitting_t>();
 		private static nk_widget_bounds_t _nk_widget_bounds = LFT<nk_widget_bounds_t>();
@@ -594,6 +609,7 @@ namespace NuklearSharp
 		private static nk_label_wrap_t _nk_label_wrap = LFT<nk_label_wrap_t>();
 		private static nk_label_colored_wrap_t _nk_label_colored_wrap = LFT<nk_label_colored_wrap_t>();
 		private static nk_image_t _nk_image = LFT<nk_image_t>();
+		private static nk_image_color_t _nk_image_color = LFT<nk_image_color_t>();
 		private static nk_button_text_t _nk_button_text = LFT<nk_button_text_t>();
 		private static nk_button_label_t _nk_button_label = LFT<nk_button_label_t>();
 		private static nk_button_color_t _nk_button_color = LFT<nk_button_color_t>();
@@ -630,10 +646,14 @@ namespace NuklearSharp
 		private static nk_selectable_text_t _nk_selectable_text = LFT<nk_selectable_text_t>();
 		private static nk_selectable_image_label_t _nk_selectable_image_label = LFT<nk_selectable_image_label_t>();
 		private static nk_selectable_image_text_t _nk_selectable_image_text = LFT<nk_selectable_image_text_t>();
+		private static nk_selectable_symbol_label_t _nk_selectable_symbol_label = LFT<nk_selectable_symbol_label_t>();
+		private static nk_selectable_symbol_text_t _nk_selectable_symbol_text = LFT<nk_selectable_symbol_text_t>();
 		private static nk_select_label_t _nk_select_label = LFT<nk_select_label_t>();
 		private static nk_select_text_t _nk_select_text = LFT<nk_select_text_t>();
 		private static nk_select_image_label_t _nk_select_image_label = LFT<nk_select_image_label_t>();
 		private static nk_select_image_text_t _nk_select_image_text = LFT<nk_select_image_text_t>();
+		private static nk_select_symbol_label_t _nk_select_symbol_label = LFT<nk_select_symbol_label_t>();
+		private static nk_select_symbol_text_t _nk_select_symbol_text = LFT<nk_select_symbol_text_t>();
 		private static nk_slide_float_t _nk_slide_float = LFT<nk_slide_float_t>();
 		private static nk_slide_int_t _nk_slide_int = LFT<nk_slide_int_t>();
 		private static nk_slider_float_t _nk_slider_float = LFT<nk_slider_float_t>();
@@ -754,8 +774,9 @@ namespace NuklearSharp
 		public static void nk_window_show(nk_context* ctx, byte* name, nk_show_states state) => _nk_window_show(ctx, name, state);
 		public static void nk_window_show_if(nk_context* ctx, byte* name, nk_show_states state, int cond) => _nk_window_show_if(ctx, name, state, cond);
 		public static int nk_group_begin(nk_context* ctx, byte* title, uint nkflags) => _nk_group_begin(ctx, title, nkflags);
-		public static int nk_group_scrolled_offset_begin(nk_context* ctx, uint* x_offset, uint* y_offset, byte* s, uint nkflags) => _nk_group_scrolled_offset_begin(ctx, x_offset, y_offset, s, nkflags);
-		public static int nk_group_scrolled_begin(nk_context* ctx, nk_scroll* scroll, byte* title, uint nkflags) => _nk_group_scrolled_begin(ctx, scroll, title, nkflags);
+		public static int nk_group_begin_titled(nk_context* ctx, byte* name, byte* title, uint nkflags) => _nk_group_begin_titled(ctx, name, title, nkflags);
+		public static int nk_group_scrolled_offset_begin(nk_context* ctx, uint* x_offset, uint* y_offset, byte* title, uint nkflags) => _nk_group_scrolled_offset_begin(ctx, x_offset, y_offset, title, nkflags);
+		public static int nk_group_scrolled_begin(nk_context* ctx, nk_scroll* off, byte* title, uint nkflags) => _nk_group_scrolled_begin(ctx, off, title, nkflags);
 		public static void nk_group_scrolled_end(nk_context* ctx) => _nk_group_scrolled_end(ctx);
 		public static void nk_group_end(nk_context* ctx) => _nk_group_end(ctx);
 		public static int nk_list_view_begin(nk_context* ctx, nk_list_view* nlv_out, byte* id, uint nkflags, int row_height, int row_count) => _nk_list_view_begin(ctx, nlv_out, id, nkflags, row_height, row_count);
@@ -766,6 +787,9 @@ namespace NuklearSharp
 		public static int nk_tree_state_push(nk_context* ctx, nk_tree_type tree_type, byte* title, nk_collapse_states* state) => _nk_tree_state_push(ctx, tree_type, title, state);
 		public static int nk_tree_state_image_push(nk_context* ctx, nk_tree_type tree_type, nk_image img, byte* title, nk_collapse_states* state) => _nk_tree_state_image_push(ctx, tree_type, img, title, state);
 		public static void nk_tree_state_pop(nk_context* ctx) => _nk_tree_state_pop(ctx);
+		public static int nk_tree_element_push_hashed(nk_context* ctx, nk_tree_type tree_type, byte* title, nk_collapse_states initial_state, int* selected, byte* hash, int len, int seed) => _nk_tree_element_push_hashed(ctx, tree_type, title, initial_state, selected, hash, len, seed);
+		public static int nk_tree_element_image_push_hashed(nk_context* ctx, nk_tree_type tree_type, nk_image img, byte* title, nk_collapse_states initial_state, int* selected, byte* hash, int len, int seed) => _nk_tree_element_image_push_hashed(ctx, tree_type, img, title, initial_state, selected, hash, len, seed);
+		public static void nk_tree_element_pop(nk_context* ctx) => _nk_tree_element_pop(ctx);
 		public static nk_widget_layout_states nk_widget(nk_rect* r, nk_context* ctx) => _nk_widget(r, ctx);
 		public static nk_widget_layout_states nk_widget_fitting(nk_rect* r, nk_context* ctx, nk_vec2 v) => _nk_widget_fitting(r, ctx, v);
 		public static nk_rect nk_widget_bounds(nk_context* ctx) => _nk_widget_bounds(ctx);
@@ -786,6 +810,7 @@ namespace NuklearSharp
 		public static void nk_label_wrap(nk_context* ctx, byte* s) => _nk_label_wrap(ctx, s);
 		public static void nk_label_colored_wrap(nk_context* ctx, byte* s, nk_color color) => _nk_label_colored_wrap(ctx, s, color);
 		public static void nk_image(nk_context* ctx, nk_image img) => _nk_image(ctx, img);
+		public static void nk_image_color(nk_context* ctx, nk_image image, nk_color color) => _nk_image_color(ctx, image, color);
 		public static int nk_button_text(nk_context* ctx, byte* title, int len) => _nk_button_text(ctx, title, len);
 		public static int nk_button_label(nk_context* ctx, byte* title) => _nk_button_label(ctx, title);
 		public static int nk_button_color(nk_context* ctx, nk_color color) => _nk_button_color(ctx, color);
@@ -822,18 +847,22 @@ namespace NuklearSharp
 		public static int nk_selectable_text(nk_context* ctx, byte* s, int i, uint align_nkflags, int* val) => _nk_selectable_text(ctx, s, i, align_nkflags, val);
 		public static int nk_selectable_image_label(nk_context* ctx, nk_image img, byte* s, uint align_nkflags, int* val) => _nk_selectable_image_label(ctx, img, s, align_nkflags, val);
 		public static int nk_selectable_image_text(nk_context* ctx, nk_image img, byte* s, int i, uint align_nkflags, int* val) => _nk_selectable_image_text(ctx, img, s, i, align_nkflags, val);
+		public static int nk_selectable_symbol_label(nk_context* ctx, nk_symbol_type st, byte* s, uint align_nkflags, int* val) => _nk_selectable_symbol_label(ctx, st, s, align_nkflags, val);
+		public static int nk_selectable_symbol_text(nk_context* ctx, nk_symbol_type st, byte* s, int i, uint align_nkflags, int* val) => _nk_selectable_symbol_text(ctx, st, s, i, align_nkflags, val);
 		public static int nk_select_label(nk_context* ctx, byte* s, uint align_nkflags, int val) => _nk_select_label(ctx, s, align_nkflags, val);
 		public static int nk_select_text(nk_context* ctx, byte* s, int i, uint align_nkflags, int val) => _nk_select_text(ctx, s, i, align_nkflags, val);
 		public static int nk_select_image_label(nk_context* ctx, nk_image img, byte* s, uint align_nkflags, int val) => _nk_select_image_label(ctx, img, s, align_nkflags, val);
 		public static int nk_select_image_text(nk_context* ctx, nk_image img, byte* s, int i, uint align_nkflags, int val) => _nk_select_image_text(ctx, img, s, i, align_nkflags, val);
+		public static int nk_select_symbol_label(nk_context* ctx, nk_symbol_type st, byte* s, uint align_nkflags, int val) => _nk_select_symbol_label(ctx, st, s, align_nkflags, val);
+		public static int nk_select_symbol_text(nk_context* ctx, nk_symbol_type st, byte* s, int i, uint align_nkflags, int val) => _nk_select_symbol_text(ctx, st, s, i, align_nkflags, val);
 		public static float nk_slide_float(nk_context* ctx, float min, float val, float max, float step) => _nk_slide_float(ctx, min, val, max, step);
 		public static int nk_slide_int(nk_context* ctx, int min, int val, int max, int step) => _nk_slide_int(ctx, min, val, max, step);
 		public static int nk_slider_float(nk_context* ctx, float min, float* val, float max, float step) => _nk_slider_float(ctx, min, val, max, step);
 		public static int nk_slider_int(nk_context* ctx, int min, int* val, int max, int step) => _nk_slider_int(ctx, min, val, max, step);
 		public static int nk_progress(nk_context* ctx, IntPtr* cur_nksize, IntPtr max_nksize, int modifyable) => _nk_progress(ctx, cur_nksize, max_nksize, modifyable);
 		public static IntPtr nk_prog(nk_context* ctx, IntPtr cur_nksize, IntPtr max_nksize, int modifyable) => _nk_prog(ctx, cur_nksize, max_nksize, modifyable);
-		public static nk_color nk_color_picker(nk_context* ctx, nk_color color, nk_color_format cfmt) => _nk_color_picker(ctx, color, cfmt);
-		public static int nk_color_pick(nk_context* ctx, nk_color* color, nk_color_format cfmt) => _nk_color_pick(ctx, color, cfmt);
+		public static nk_colorf nk_color_picker(nk_context* ctx, nk_colorf color, nk_color_format cfmt) => _nk_color_picker(ctx, color, cfmt);
+		public static int nk_color_pick(nk_context* ctx, nk_colorf* color, nk_color_format cfmt) => _nk_color_pick(ctx, color, cfmt);
 		public static void nk_property_int(nk_context* ctx, byte* name, int min, int* val, int max, int step, float inc_per_pixel) => _nk_property_int(ctx, name, min, val, max, step, inc_per_pixel);
 		public static void nk_property_float(nk_context* ctx, byte* name, float min, float* val, float max, float step, float inc_per_pixel) => _nk_property_float(ctx, name, min, val, max, step, inc_per_pixel);
 		public static void nk_property_double(nk_context* ctx, byte* name, double min, double* val, double max, double step, float inc_per_pixel) => _nk_property_double(ctx, name, min, val, max, step, inc_per_pixel);

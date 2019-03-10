@@ -16,7 +16,11 @@ namespace NuklearSharp
 			} else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) {
 				names = new[] {
 					"libnuklear.so",
-					"libnuklear.so.0"
+					"libnuklear.so.4",
+					"libnuklear.so.4.00",
+					"libnuklear.so.4.00.2",
+					"libnuklear.so.4.0",
+					"libnuklear.so.4.0.2"
 				};
 			} else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX)) {
 				names = new[] { "libnuklear.dylib" };
@@ -43,7 +47,7 @@ namespace NuklearSharp
 		}
 
 		/*
-		 * nk_char -> char
+		 * nk_char -> *signed* char (which we misinterpret as (unsigned) byte -- so sue me! it's a damn string element!!!)
 		 * nk_uchar -> unsigned char
 		 * nk_byte -> unsigned char
 		 * nk_short -> signed short

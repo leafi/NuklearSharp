@@ -1,4 +1,4 @@
-typedef char nk_char;
+typedef signed char nk_char;
 typedef unsigned char nk_uchar;
 typedef unsigned char nk_byte;
 typedef signed short nk_short;
@@ -12,15 +12,15 @@ typedef nk_uint nk_hash;
 typedef nk_uint nk_flags;
 typedef nk_uint nk_rune;
 
-typedef char _dummy_array411[(sizeof(nk_short) == 2)?1:-1];
-typedef char _dummy_array412[(sizeof(nk_ushort) == 2)?1:-1];
-typedef char _dummy_array413[(sizeof(nk_uint) == 4)?1:-1];
-typedef char _dummy_array414[(sizeof(nk_int) == 4)?1:-1];
-typedef char _dummy_array415[(sizeof(nk_byte) == 1)?1:-1];
-typedef char _dummy_array416[(sizeof(nk_flags) >= 4)?1:-1];
-typedef char _dummy_array417[(sizeof(nk_rune) >= 4)?1:-1];
-typedef char _dummy_array418[(sizeof(nk_size) >= sizeof(void*))?1:-1];
-typedef char _dummy_array419[(sizeof(nk_ptr) >= sizeof(void*))?1:-1];
+typedef char _dummy_array415[(sizeof(nk_short) == 2)?1:-1];
+typedef char _dummy_array416[(sizeof(nk_ushort) == 2)?1:-1];
+typedef char _dummy_array417[(sizeof(nk_uint) == 4)?1:-1];
+typedef char _dummy_array418[(sizeof(nk_int) == 4)?1:-1];
+typedef char _dummy_array419[(sizeof(nk_byte) == 1)?1:-1];
+typedef char _dummy_array420[(sizeof(nk_flags) >= 4)?1:-1];
+typedef char _dummy_array421[(sizeof(nk_rune) >= 4)?1:-1];
+typedef char _dummy_array422[(sizeof(nk_size) >= sizeof(void*))?1:-1];
+typedef char _dummy_array423[(sizeof(nk_ptr) >= sizeof(void*))?1:-1];
 
 struct nk_buffer;
 struct nk_allocator;
@@ -104,11 +104,8 @@ enum nk_symbol_type {
 extern int nk_init_fixed(struct nk_context*, void *memory, nk_size size, const struct nk_user_font*);
 extern int nk_init(struct nk_context*, struct nk_allocator*, const struct nk_user_font*);
 extern int nk_init_custom(struct nk_context*, struct nk_buffer *cmds, struct nk_buffer *pool, const struct nk_user_font*);
-
 extern void nk_clear(struct nk_context*);
-
 extern void nk_free(struct nk_context*);
-
 extern void nk_set_user_data(struct nk_context*, nk_handle handle);
 enum nk_keys {
     NK_KEY_NONE,
@@ -152,23 +149,14 @@ enum nk_buttons {
     NK_BUTTON_DOUBLE,
     NK_BUTTON_MAX
 };
-
 extern void nk_input_begin(struct nk_context*);
-
 extern void nk_input_motion(struct nk_context*, int x, int y);
-
 extern void nk_input_key(struct nk_context*, enum nk_keys, int down);
-
 extern void nk_input_button(struct nk_context*, enum nk_buttons, int x, int y, int down);
-
 extern void nk_input_scroll(struct nk_context*, struct nk_vec2 val);
-
 extern void nk_input_char(struct nk_context*, char);
-
 extern void nk_input_glyph(struct nk_context*, const nk_glyph);
-
 extern void nk_input_unicode(struct nk_context*, nk_rune);
-
 extern void nk_input_end(struct nk_context*);
 enum nk_anti_aliasing {NK_ANTI_ALIASING_OFF, NK_ANTI_ALIASING_ON};
 enum nk_convert_result {
@@ -194,16 +182,11 @@ struct nk_convert_config {
     nk_size vertex_size;
     nk_size vertex_alignment;
 };
-
 extern const struct nk_command* nk__begin(struct nk_context*);
-
 extern const struct nk_command* nk__next(struct nk_context*, const struct nk_command*);
 extern nk_flags nk_convert(struct nk_context*, struct nk_buffer *cmds, struct nk_buffer *vertices, struct nk_buffer *elements, const struct nk_convert_config*);
-
 extern const struct nk_draw_command* nk__draw_begin(const struct nk_context*, const struct nk_buffer*);
-
 extern const struct nk_draw_command* nk__draw_end(const struct nk_context*, const struct nk_buffer*);
-
 extern const struct nk_draw_command* nk__draw_next(const struct nk_draw_command*, const struct nk_buffer*, const struct nk_context*);
 enum nk_panel_flags {
     NK_WINDOW_BORDER = (1 << (0)),
@@ -220,116 +203,75 @@ enum nk_panel_flags {
 };
 extern int nk_begin(struct nk_context *ctx, const char *title, struct nk_rect bounds, nk_flags flags);
 extern int nk_begin_titled(struct nk_context *ctx, const char *name, const char *title, struct nk_rect bounds, nk_flags flags);
-
 extern void nk_end(struct nk_context *ctx);
-
 extern struct nk_window *nk_window_find(struct nk_context *ctx, const char *name);
-
 extern struct nk_rect nk_window_get_bounds(const struct nk_context *ctx);
-
 extern struct nk_vec2 nk_window_get_position(const struct nk_context *ctx);
-
 extern struct nk_vec2 nk_window_get_size(const struct nk_context*);
-
 extern float nk_window_get_width(const struct nk_context*);
-
 extern float nk_window_get_height(const struct nk_context*);
-
 extern struct nk_panel* nk_window_get_panel(struct nk_context*);
-
 extern struct nk_rect nk_window_get_content_region(struct nk_context*);
-
 extern struct nk_vec2 nk_window_get_content_region_min(struct nk_context*);
-
 extern struct nk_vec2 nk_window_get_content_region_max(struct nk_context*);
-
 extern struct nk_vec2 nk_window_get_content_region_size(struct nk_context*);
-
 extern struct nk_command_buffer* nk_window_get_canvas(struct nk_context*);
-
 extern int nk_window_has_focus(const struct nk_context*);
-
-extern int nk_window_is_collapsed(struct nk_context *ctx, const char *name);
-
-extern int nk_window_is_closed(struct nk_context*, const char*);
-
-extern int nk_window_is_hidden(struct nk_context*, const char*);
-
-extern int nk_window_is_active(struct nk_context*, const char*);
-
 extern int nk_window_is_hovered(struct nk_context*);
-
+extern int nk_window_is_collapsed(struct nk_context *ctx, const char *name);
+extern int nk_window_is_closed(struct nk_context*, const char*);
+extern int nk_window_is_hidden(struct nk_context*, const char*);
+extern int nk_window_is_active(struct nk_context*, const char*);
 extern int nk_window_is_any_hovered(struct nk_context*);
-
 extern int nk_item_is_any_active(struct nk_context*);
-
 extern void nk_window_set_bounds(struct nk_context*, const char *name, struct nk_rect bounds);
-
 extern void nk_window_set_position(struct nk_context*, const char *name, struct nk_vec2 pos);
-
 extern void nk_window_set_size(struct nk_context*, const char *name, struct nk_vec2);
-
 extern void nk_window_set_focus(struct nk_context*, const char *name);
-
 extern void nk_window_close(struct nk_context *ctx, const char *name);
-
 extern void nk_window_collapse(struct nk_context*, const char *name, enum nk_collapse_states state);
-
 extern void nk_window_collapse_if(struct nk_context*, const char *name, enum nk_collapse_states, int cond);
-
 extern void nk_window_show(struct nk_context*, const char *name, enum nk_show_states);
-
 extern void nk_window_show_if(struct nk_context*, const char *name, enum nk_show_states, int cond);
 extern void nk_layout_set_min_row_height(struct nk_context*, float height);
-
 extern void nk_layout_reset_min_row_height(struct nk_context*);
-
 extern struct nk_rect nk_layout_widget_bounds(struct nk_context*);
-
 extern float nk_layout_ratio_from_pixel(struct nk_context*, float pixel_width);
-
 extern void nk_layout_row_dynamic(struct nk_context *ctx, float height, int cols);
 extern void nk_layout_row_static(struct nk_context *ctx, float height, int item_width, int cols);
-
 extern void nk_layout_row_begin(struct nk_context *ctx, enum nk_layout_format fmt, float row_height, int cols);
-
 extern void nk_layout_row_push(struct nk_context*, float value);
-
 extern void nk_layout_row_end(struct nk_context*);
-
 extern void nk_layout_row(struct nk_context*, enum nk_layout_format, float height, int cols, const float *ratio);
-
 extern void nk_layout_row_template_begin(struct nk_context*, float row_height);
-
 extern void nk_layout_row_template_push_dynamic(struct nk_context*);
-
 extern void nk_layout_row_template_push_variable(struct nk_context*, float min_width);
-
 extern void nk_layout_row_template_push_static(struct nk_context*, float width);
-
 extern void nk_layout_row_template_end(struct nk_context*);
-
 extern void nk_layout_space_begin(struct nk_context*, enum nk_layout_format, float height, int widget_count);
-
-extern void nk_layout_space_push(struct nk_context*, struct nk_rect);
-
+extern void nk_layout_space_push(struct nk_context*, struct nk_rect bounds);
 extern void nk_layout_space_end(struct nk_context*);
-
 extern struct nk_rect nk_layout_space_bounds(struct nk_context*);
-
 extern struct nk_vec2 nk_layout_space_to_screen(struct nk_context*, struct nk_vec2);
-
 extern struct nk_vec2 nk_layout_space_to_local(struct nk_context*, struct nk_vec2);
-
 extern struct nk_rect nk_layout_space_rect_to_screen(struct nk_context*, struct nk_rect);
-
 extern struct nk_rect nk_layout_space_rect_to_local(struct nk_context*, struct nk_rect);
-
 extern int nk_group_begin(struct nk_context*, const char *title, nk_flags);
-extern int nk_group_scrolled_offset_begin(struct nk_context*, nk_uint *x_offset, nk_uint *y_offset, const char*, nk_flags);
-extern int nk_group_scrolled_begin(struct nk_context*, struct nk_scroll*, const char *title, nk_flags);
-extern void nk_group_scrolled_end(struct nk_context*);
+extern int nk_group_begin_titled(struct nk_context*, const char *name, const char *title, nk_flags);
 extern void nk_group_end(struct nk_context*);
+extern int nk_group_scrolled_offset_begin(struct nk_context*, nk_uint *x_offset, nk_uint *y_offset, const char *title, nk_flags flags);
+extern int nk_group_scrolled_begin(struct nk_context*, struct nk_scroll *off, const char *title, nk_flags);
+extern void nk_group_scrolled_end(struct nk_context*);
+extern int nk_tree_push_hashed(struct nk_context*, enum nk_tree_type, const char *title, enum nk_collapse_states initial_state, const char *hash, int len,int seed);
+extern int nk_tree_image_push_hashed(struct nk_context*, enum nk_tree_type, struct nk_image, const char *title, enum nk_collapse_states initial_state, const char *hash, int len,int seed);
+extern void nk_tree_pop(struct nk_context*);
+extern int nk_tree_state_push(struct nk_context*, enum nk_tree_type, const char *title, enum nk_collapse_states *state);
+extern int nk_tree_state_image_push(struct nk_context*, enum nk_tree_type, struct nk_image, const char *title, enum nk_collapse_states *state);
+extern void nk_tree_state_pop(struct nk_context*);
+
+extern int nk_tree_element_push_hashed(struct nk_context*, enum nk_tree_type, const char *title, enum nk_collapse_states initial_state, int *selected, const char *hash, int len, int seed);
+extern int nk_tree_element_image_push_hashed(struct nk_context*, enum nk_tree_type, struct nk_image, const char *title, enum nk_collapse_states initial_state, int *selected, const char *hash, int len,int seed);
+extern void nk_tree_element_pop(struct nk_context*);
 
 struct nk_list_view {
 
@@ -342,14 +284,6 @@ struct nk_list_view {
 };
 extern int nk_list_view_begin(struct nk_context*, struct nk_list_view *out, const char *id, nk_flags, int row_height, int row_count);
 extern void nk_list_view_end(struct nk_list_view*);
-
-extern int nk_tree_push_hashed(struct nk_context*, enum nk_tree_type, const char *title, enum nk_collapse_states initial_state, const char *hash, int len,int seed);
-
-extern int nk_tree_image_push_hashed(struct nk_context*, enum nk_tree_type, struct nk_image, const char *title, enum nk_collapse_states initial_state, const char *hash, int len,int seed);
-extern void nk_tree_pop(struct nk_context*);
-extern int nk_tree_state_push(struct nk_context*, enum nk_tree_type, const char *title, enum nk_collapse_states *state);
-extern int nk_tree_state_image_push(struct nk_context*, enum nk_tree_type, struct nk_image, const char *title, enum nk_collapse_states *state);
-extern void nk_tree_state_pop(struct nk_context*);
 
 enum nk_widget_layout_states {
     NK_WIDGET_INVALID,
@@ -400,6 +334,7 @@ extern void nk_label_colored(struct nk_context*, const char*, nk_flags align, st
 extern void nk_label_wrap(struct nk_context*, const char*);
 extern void nk_label_colored_wrap(struct nk_context*, const char*, struct nk_color);
 extern void nk_image(struct nk_context*, struct nk_image);
+extern void nk_image_color(struct nk_context*, struct nk_image, struct nk_color);
 extern int nk_button_text(struct nk_context*, const char *title, int len);
 extern int nk_button_label(struct nk_context*, const char *title);
 extern int nk_button_color(struct nk_context*, struct nk_color);
@@ -439,10 +374,15 @@ extern int nk_selectable_label(struct nk_context*, const char*, nk_flags align, 
 extern int nk_selectable_text(struct nk_context*, const char*, int, nk_flags align, int *value);
 extern int nk_selectable_image_label(struct nk_context*,struct nk_image, const char*, nk_flags align, int *value);
 extern int nk_selectable_image_text(struct nk_context*,struct nk_image, const char*, int, nk_flags align, int *value);
+extern int nk_selectable_symbol_label(struct nk_context*,enum nk_symbol_type, const char*, nk_flags align, int *value);
+extern int nk_selectable_symbol_text(struct nk_context*,enum nk_symbol_type, const char*, int, nk_flags align, int *value);
+
 extern int nk_select_label(struct nk_context*, const char*, nk_flags align, int value);
 extern int nk_select_text(struct nk_context*, const char*, int, nk_flags align, int value);
 extern int nk_select_image_label(struct nk_context*, struct nk_image,const char*, nk_flags align, int value);
 extern int nk_select_image_text(struct nk_context*, struct nk_image,const char*, int, nk_flags align, int value);
+extern int nk_select_symbol_label(struct nk_context*,enum nk_symbol_type, const char*, nk_flags align, int value);
+extern int nk_select_symbol_text(struct nk_context*,enum nk_symbol_type, const char*, int, nk_flags align, int value);
 
 extern float nk_slide_float(struct nk_context*, float min, float val, float max, float step);
 extern int nk_slide_int(struct nk_context*, int min, int val, int max, int step);
@@ -452,9 +392,8 @@ extern int nk_slider_int(struct nk_context*, int min, int *val, int max, int ste
 extern int nk_progress(struct nk_context*, nk_size *cur, nk_size max, int modifyable);
 extern nk_size nk_prog(struct nk_context*, nk_size cur, nk_size max, int modifyable);
 
-extern struct nk_color nk_color_picker(struct nk_context*, struct nk_color, enum nk_color_format);
-extern int nk_color_pick(struct nk_context*, struct nk_color*, enum nk_color_format);
-
+extern struct nk_colorf nk_color_picker(struct nk_context*, struct nk_colorf, enum nk_color_format);
+extern int nk_color_pick(struct nk_context*, struct nk_colorf*, enum nk_color_format);
 extern void nk_property_int(struct nk_context*, const char *name, int min, int *val, int max, int step, float inc_per_pixel);
 extern void nk_property_float(struct nk_context*, const char *name, float min, float *val, float max, float step, float inc_per_pixel);
 extern void nk_property_double(struct nk_context*, const char *name, double min, double *val, double max, double step, float inc_per_pixel);
@@ -641,6 +580,7 @@ extern struct nk_color nk_rgb_iv(const int *rgb);
 extern struct nk_color nk_rgb_bv(const nk_byte* rgb);
 extern struct nk_color nk_rgb_f(float r, float g, float b);
 extern struct nk_color nk_rgb_fv(const float *rgb);
+extern struct nk_color nk_rgb_cf(struct nk_colorf c);
 extern struct nk_color nk_rgb_hex(const char *rgb);
 
 extern struct nk_color nk_rgba(int r, int g, int b, int a);
@@ -649,7 +589,13 @@ extern struct nk_color nk_rgba_iv(const int *rgba);
 extern struct nk_color nk_rgba_bv(const nk_byte *rgba);
 extern struct nk_color nk_rgba_f(float r, float g, float b, float a);
 extern struct nk_color nk_rgba_fv(const float *rgba);
+extern struct nk_color nk_rgba_cf(struct nk_colorf c);
 extern struct nk_color nk_rgba_hex(const char *rgb);
+
+extern struct nk_colorf nk_hsva_colorf(float h, float s, float v, float a);
+extern struct nk_colorf nk_hsva_colorfv(float *c);
+extern void nk_colorf_hsva_f(float *out_h, float *out_s, float *out_v, float *out_a, struct nk_colorf in);
+extern void nk_colorf_hsva_fv(float *hsva, struct nk_colorf in);
 
 extern struct nk_color nk_hsv(int h, int s, int v);
 extern struct nk_color nk_hsv_iv(const int *hsv);
@@ -665,6 +611,7 @@ extern struct nk_color nk_hsva_fv(const float *hsva);
 
 extern void nk_color_f(float *r, float *g, float *b, float *a, struct nk_color);
 extern void nk_color_fv(float *rgba_out, struct nk_color);
+extern struct nk_colorf nk_color_cf(struct nk_color);
 extern void nk_color_d(double *r, double *g, double *b, double *a, struct nk_color);
 extern void nk_color_dv(double *rgba_out, struct nk_color);
 
@@ -1310,6 +1257,7 @@ extern int nk_input_is_key_pressed(const struct nk_input*, enum nk_keys);
 extern int nk_input_is_key_released(const struct nk_input*, enum nk_keys);
 extern int nk_input_is_key_down(const struct nk_input*, enum nk_keys);
 typedef nk_ushort nk_draw_index;
+
 enum nk_draw_list_stroke {
     NK_STROKE_OPEN = nk_false,
 
@@ -1395,12 +1343,10 @@ struct nk_draw_list {
 
 extern void nk_draw_list_init(struct nk_draw_list*);
 extern void nk_draw_list_setup(struct nk_draw_list*, const struct nk_convert_config*, struct nk_buffer *cmds, struct nk_buffer *vertices, struct nk_buffer *elements, enum nk_anti_aliasing line_aa,enum nk_anti_aliasing shape_aa);
-extern void nk_draw_list_clear(struct nk_draw_list*);
 
 extern const struct nk_draw_command* nk__draw_list_begin(const struct nk_draw_list*, const struct nk_buffer*);
 extern const struct nk_draw_command* nk__draw_list_next(const struct nk_draw_command*, const struct nk_buffer*, const struct nk_draw_list*);
 extern const struct nk_draw_command* nk__draw_list_end(const struct nk_draw_list*, const struct nk_buffer*);
-extern void nk_draw_list_clear(struct nk_draw_list *list);
 
 extern void nk_draw_list_path_clear(struct nk_draw_list*);
 extern void nk_draw_list_path_line_to(struct nk_draw_list*, struct nk_vec2 pos);
@@ -1823,6 +1769,7 @@ extern struct nk_style_item nk_style_item_image(struct nk_image img);
 extern struct nk_style_item nk_style_item_color(struct nk_color);
 extern struct nk_style_item nk_style_item_hide(void);
 enum nk_panel_type {
+    NK_PANEL_NONE = 0,
     NK_PANEL_WINDOW = (1 << (0)),
     NK_PANEL_GROUP = (1 << (1)),
     NK_PANEL_POPUP = (1 << (2)),

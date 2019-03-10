@@ -21,7 +21,7 @@ namespace NuklearSharp
 		private delegate void nk_layout_row_template_push_static_t(nk_context* ctx, float width);
 		private delegate void nk_layout_row_template_end_t(nk_context* ctx);
 		private delegate void nk_layout_space_begin_t(nk_context* ctx, nk_layout_format fmt, float height, int widget_count);
-		private delegate void nk_layout_space_push_t(nk_context* ctx, nk_rect rect);
+		private delegate void nk_layout_space_push_t(nk_context* ctx, nk_rect bounds);
 		private delegate void nk_layout_space_end_t(nk_context* ctx);
 		private delegate nk_rect nk_layout_space_bounds_t(nk_context* ctx);
 		private delegate nk_vec2 nk_layout_space_to_screen_t(nk_context* ctx, nk_vec2 v);
@@ -71,7 +71,7 @@ namespace NuklearSharp
 		public static void nk_layout_row_template_push_static(nk_context* ctx, float width) => _nk_layout_row_template_push_static(ctx, width);
 		public static void nk_layout_row_template_end(nk_context* ctx) => _nk_layout_row_template_end(ctx);
 		public static void nk_layout_space_begin(nk_context* ctx, nk_layout_format fmt, float height, int widget_count) => _nk_layout_space_begin(ctx, fmt, height, widget_count);
-		public static void nk_layout_space_push(nk_context* ctx, nk_rect rect) => _nk_layout_space_push(ctx, rect);
+		public static void nk_layout_space_push(nk_context* ctx, nk_rect bounds) => _nk_layout_space_push(ctx, bounds);
 		public static void nk_layout_space_end(nk_context* ctx) => _nk_layout_space_end(ctx);
 		public static nk_rect nk_layout_space_bounds(nk_context* ctx) => _nk_layout_space_bounds(ctx);
 		public static nk_vec2 nk_layout_space_to_screen(nk_context* ctx, nk_vec2 v) => _nk_layout_space_to_screen(ctx, v);
