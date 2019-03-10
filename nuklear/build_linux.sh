@@ -4,6 +4,7 @@ ls work/nuklear.pre && cp work/nuklear.pre work/nuklear.pre.old
 clang -E -P nuklear_options.h | sed -n '/./,/^$/p' >work/nuklear.pre
 ls work/nuklear.pre.old && echo 'Diff between old nuklear.pre and new nuklear.pre:' && diff work/nuklear.pre.old work/nuklear.pre && echo End diff
 
+mkdir -p ../native/linux-x64
 # compile shared lib
-clang -shared -fpic work/nuklear_impl.c -o ../native/linux-x64/libnuklear.so
+clang -Os -shared -fpic work/nuklear_impl.c -o ../native/linux-x64/libnuklear.so
 
