@@ -1,0 +1,10 @@
+Cross-compiled using mingw-w64-gcc on Arch Linux.
+
+(The advantage of doing this is the resulting .dll only relies on
+"msvcrt.dll", the version of the C runtime baked into all modern
+versions of Windows - so there shouldn't be a need to install a specific
+Visual C++ Runtime to use the DLL.
+
+The downside is that MinGW isn't known to be the most stable compiler.
+Shout if it doesn't work. Hopefully it does.)
+

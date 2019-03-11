@@ -1,0 +1,8 @@
+Compiled using Xcode's clang on my OSX 10.13 laptop.
+It's a pure 64-bit library.
+
+I asked the compiler to set a min target version of 10.7.
+
+Hopefully the library will work on 10.7 and up, but it will at least work
+on 10.13 and up.
+
