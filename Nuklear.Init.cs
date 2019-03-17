@@ -5,10 +5,15 @@ using nk_handle = System.IntPtr;
 
 namespace NuklearSharp
 {
+	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 	public delegate IntPtr nk_plugin_alloc_t(nk_handle handle, IntPtr old, IntPtr nk_size);
+	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 	public delegate void nk_plugin_free_t(nk_handle handle, IntPtr old);
+	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 	public delegate int nk_plugin_filter_t(ref nk_text_edit edit, uint unicode_rune);
+	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 	public delegate void nk_plugin_paste_t(nk_handle handle, ref nk_text_edit edit);
+	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 	public unsafe delegate void nk_plugin_copy_t(nk_handle handle, byte* str, int len);
 
 	/* ... */
