@@ -466,7 +466,7 @@ namespace NuklearSharp
 
 		private delegate void nk_draw_list_init_t(nk_draw_list* dl);
 		private delegate void nk_draw_list_setup_t(nk_draw_list* dl, nk_convert_config* ncc, nk_buffer* cmds, nk_buffer* vertices, nk_buffer* elements, nk_anti_aliasing line_aa, nk_anti_aliasing shape_aa);
-		private delegate void nk_draw_list_clear_t(nk_draw_list* dl);
+		// private delegate void nk_draw_list_clear_t(nk_draw_list* dl);
 
 		private delegate nk_draw_command* nk__draw_list_begin_t(nk_draw_list* dl, nk_buffer* buf);
 		private delegate nk_draw_command* nk__draw_list_next_t(nk_draw_command* drawcmd, nk_buffer* buf, nk_draw_list* dl);
@@ -505,7 +505,7 @@ namespace NuklearSharp
 
 		private static nk_draw_list_init_t _nk_draw_list_init = LFT<nk_draw_list_init_t>();
 		private static nk_draw_list_setup_t _nk_draw_list_setup = LFT<nk_draw_list_setup_t>();
-		private static nk_draw_list_clear_t _nk_draw_list_clear = LFT<nk_draw_list_clear_t>();
+		// private static nk_draw_list_clear_t _nk_draw_list_clear = LFT<nk_draw_list_clear_t>();
 		private static nk__draw_list_begin_t _nk__draw_list_begin = LFT<nk__draw_list_begin_t>();
 		private static nk__draw_list_next_t _nk__draw_list_next = LFT<nk__draw_list_next_t>();
 		private static nk__draw_list_end_t _nk__draw_list_end = LFT<nk__draw_list_end_t>();
@@ -537,7 +537,7 @@ namespace NuklearSharp
 
 		public static void nk_draw_list_init(nk_draw_list* dl) => _nk_draw_list_init(dl);
 		public static void nk_draw_list_setup(nk_draw_list* dl, nk_convert_config* ncc, nk_buffer* cmds, nk_buffer* vertices, nk_buffer* elements, nk_anti_aliasing line_aa, nk_anti_aliasing shape_aa) => _nk_draw_list_setup(dl, ncc, cmds, vertices, elements, line_aa, shape_aa);
-		public static void nk_draw_list_clear(nk_draw_list* dl) => _nk_draw_list_clear(dl);
+		// public static void nk_draw_list_clear(nk_draw_list* dl) => _nk_draw_list_clear(dl);
 		public static nk_draw_command* nk__draw_list_begin(nk_draw_list* dl, nk_buffer* buf) => _nk__draw_list_begin(dl, buf);
 		public static nk_draw_command* nk__draw_list_next(nk_draw_command* drawcmd, nk_buffer* buf, nk_draw_list* dl) => _nk__draw_list_next(drawcmd, buf, dl);
 		public static nk_draw_command* nk__draw_list_end(nk_draw_list* dl, nk_buffer* buf) => _nk__draw_list_end(dl, buf);
